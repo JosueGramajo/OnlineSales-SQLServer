@@ -1,0 +1,56 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	background-image: url('../img/abstract-minimalistic-clean-wallpaper.jpg');
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+table{
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+.tableready{
+	margin-left:45%;
+	margin-top:2%;
+}
+.login input[type=submit]{
+	width: 150px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+.login input[type=submit]:hover{
+	opacity: 0.8;
+}
+
+.login input[type=submit]:active{
+	opacity: 0.6;
+}

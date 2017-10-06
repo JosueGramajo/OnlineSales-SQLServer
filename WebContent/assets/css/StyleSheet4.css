@@ -1,0 +1,19 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	background-image: url('../img/zelda2.png');
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+.head{
+	font-size:18px;
+	margin-left:25%;
+	padding:50px;
+}
+.regresar{
+	font-size:10px;
+	margin-left:25%;
+	padding:50px;		
+}
