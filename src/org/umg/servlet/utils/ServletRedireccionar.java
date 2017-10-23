@@ -42,6 +42,10 @@ public class ServletRedireccionar extends HttpServlet {
 				peticion.setAttribute("estado", "");	
 				despachador = peticion.getRequestDispatcher("index.jsp");
 				break;
+			case "tables":
+				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+				despachador = peticion.getRequestDispatcher("administrator/pages/tables.jsp");
+				break;
 			default:
 				break;
 		}
