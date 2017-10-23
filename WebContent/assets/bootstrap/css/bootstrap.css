@@ -46,6 +46,10 @@
   .navbar {
     display: none;
   }
+  .navbar-custom {
+    color: #FFFFFF;
+    background-color: #343A40;
+  }
   .badge {
     border: 1px solid #000;
   }

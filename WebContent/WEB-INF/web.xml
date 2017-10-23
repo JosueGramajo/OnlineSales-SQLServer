@@ -14,6 +14,27 @@
   	<url-pattern>/ServletAutenticar.do</url-pattern>
   </servlet-mapping>
   
+  
+  <servlet>
+  	<servlet-name>ServletRedireccionar</servlet-name>
+  	<servlet-class>org.umg.servlet.utils.ServletRedireccionar </servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ServletRedireccionar</servlet-name>
+  	<url-pattern>/ServletRedireccionar.do</url-pattern>
+  </servlet-mapping>
+  
+
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>org.umg.servlet.filter.AuthenticationFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <jsp-config>
   	<taglib>
   		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>

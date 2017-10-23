@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import org.umg.bean.Categoria;
 import org.umg.bean.Usuario;
 import org.umg.manejador.ManejadorCategorias;
+import org.umg.manejador.ManejadorProducto;
 import org.umg.manejador.ManejadorUsuario;
 
 public class ServletAutenticar extends HttpServlet {
@@ -26,9 +27,11 @@ public class ServletAutenticar extends HttpServlet {
 		Usuario aUsuario = ManejadorUsuario.INSTANCIA.doLogin(usuario, password);
 		
 		if(aUsuario.getIdUsuario() != -1) {
+			ManejadorUsuario.sessionUser = aUsuario;
 			peticion.setAttribute("nombreUsuario", usuario);
-			peticion.setAttribute("rolUsuario", aUsuario.getIdRol());
+			peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
 			peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+			peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
 			despachador = peticion.getRequestDispatcher("usuario/dashboard.jsp");
 		}else {
 			peticion.setAttribute("estado", "Usuario o contraseña incorrectos");

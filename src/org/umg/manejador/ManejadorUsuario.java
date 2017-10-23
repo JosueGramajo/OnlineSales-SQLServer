@@ -9,12 +9,7 @@ import org.umg.db.Conexion;
 
 public class ManejadorUsuario {
 	public static ManejadorUsuario INSTANCIA = new ManejadorUsuario();
-	
-	public ArrayList<Usuario> getLista(){
-		ArrayList<Usuario> list = new ArrayList<Usuario>();
-		
-		return list;
-	}
+	public static Usuario sessionUser = new Usuario();
 	
 	public Usuario doLogin(String usr,String psw) {
 		Usuario usuario = new Usuario();
