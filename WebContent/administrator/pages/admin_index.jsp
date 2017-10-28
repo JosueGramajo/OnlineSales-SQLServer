@@ -90,7 +90,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="ServletRedireccionar.do?page=administratorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -105,10 +105,13 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="ServletRedireccionar.do?page=categories"><i class="fa fa-table fa-fw"></i> Categorias</a>
+                        </li>
+                        <li>
                             <a href="ServletRedireccionar.do?page=tables"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="ServletRedireccionar.do?page=forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
@@ -245,12 +248,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">${countCategorias }</div>
                                     <div>Categorias</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="ServletRedireccionar.do?page=categories">
                             <div class="panel-footer">
                                 <span class="pull-left">Mantenimiento Categorias</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

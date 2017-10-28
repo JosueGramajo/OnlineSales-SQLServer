@@ -1,45 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>ECommerce</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-    
   <servlet>
-  	<servlet-name>ServletAutenticar</servlet-name>
-  	<servlet-class>org.umg.servlet.usuario.ServletAutenticar </servlet-class>
+    <servlet-name>ServletAutenticar</servlet-name>
+    <servlet-class>org.umg.servlet.usuario.ServletAutenticar </servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>ServletAutenticar</servlet-name>
-  	<url-pattern>/ServletAutenticar.do</url-pattern>
+    <servlet-name>ServletAutenticar</servlet-name>
+    <url-pattern>/ServletAutenticar.do</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
-  	<servlet-name>ServletRedireccionar</servlet-name>
-  	<servlet-class>org.umg.servlet.utils.ServletRedireccionar </servlet-class>
+    <servlet-name>ServletRedireccionar</servlet-name>
+    <servlet-class>org.umg.servlet.utils.ServletRedireccionar </servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>ServletRedireccionar</servlet-name>
-  	<url-pattern>/ServletRedireccionar.do</url-pattern>
+    <servlet-name>ServletRedireccionar</servlet-name>
+    <url-pattern>/ServletRedireccionar.do</url-pattern>
   </servlet-mapping>
-  
-
+  <servlet>
+    <servlet-name>ServletEditarCategoria</servlet-name>
+    <servlet-class>org.umg.servlet.categoria.ServletEditarCategoria </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletEditarCategoria</servlet-name>
+    <url-pattern>/ServletEditarCategoria.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletEliminarCategoria</servlet-name>
+    <servlet-class>org.umg.servlet.categoria.ServletEliminarCategoria </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletEliminarCategoria</servlet-name>
+    <url-pattern>/ServletEliminarCategoria.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletAgregarCategoria</servlet-name>
+    <servlet-class>org.umg.servlet.categoria.ServletAgregarCategoria </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAgregarCategoria</servlet-name>
+    <url-pattern>/ServletAgregarCategoria.do</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>AuthenticationFilter</filter-name>
     <filter-class>org.umg.servlet.filter.AuthenticationFilter</filter-class>
   </filter>
-  
- <filter-mapping>
+  <filter-mapping>
     <filter-name>AuthenticationFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
   <jsp-config>
-  	<taglib>
-  		<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
-  		<taglib-location>c.tld</taglib-location>
-  	</taglib>
+    <taglib>
+      <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+      <taglib-location>c.tld</taglib-location>
+    </taglib>
   </jsp-config>
-  
 </web-app>

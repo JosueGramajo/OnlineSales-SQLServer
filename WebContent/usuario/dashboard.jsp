@@ -51,7 +51,7 @@
 					<li class="fa nav-item"><a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>    Carrito</a></li>
 					<li class="fa nav-item"><a class="nav-link" href="#"><i class="fa fa-info-circle"></i>    Acerca de</a>
 					</li>
-					<li class="fa nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out fa-fw"></i>  Cerrar Sesion</a>
+					<li class="fa nav-item"><a class="nav-link" href="ServletRedireccionar.do?page=logout"><i class="fa fa-sign-out fa-fw"></i>  Cerrar Sesion</a>
 					</li>
 				</ul>
 			</div>

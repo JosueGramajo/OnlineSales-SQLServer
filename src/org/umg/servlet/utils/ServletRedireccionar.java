@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.umg.bean.Categoria;
 import org.umg.bean.Usuario;
 import org.umg.manejador.ManejadorCategorias;
 import org.umg.manejador.ManejadorProducto;
@@ -34,7 +35,7 @@ public class ServletRedireccionar extends HttpServlet {
 				despachador = peticion.getRequestDispatcher("usuario/dashboard.jsp");
 				break;
 			case "administratorDashboard":
-				System.out.println("Si entra al servlet case wevon");
+				peticion.setAttribute("countCategorias", ManejadorCategorias.INSTANCIA.countCategorias());
 				despachador = peticion.getRequestDispatcher("administrator/pages/admin_index.jsp");
 				break;
 			case "logout":
@@ -42,9 +43,22 @@ public class ServletRedireccionar extends HttpServlet {
 				peticion.setAttribute("estado", "");	
 				despachador = peticion.getRequestDispatcher("index.jsp");
 				break;
+			case "categories":
+				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+				despachador = peticion.getRequestDispatcher("administrator/pages/categories_management.jsp");				
+				break;
+			case "categoriesUpdate":
+				String idCategoria = peticion.getParameter("idCategoria");
+				Categoria categoria = ManejadorCategorias.INSTANCIA.getCategoriaFromId(idCategoria);				
+				peticion.setAttribute("category", categoria);
+				despachador = peticion.getRequestDispatcher("administrator/pages/categories_update.jsp");
+				break;
 			case "tables":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 				despachador = peticion.getRequestDispatcher("administrator/pages/tables.jsp");
+				break;
+			case "forms":
+				despachador = peticion.getRequestDispatcher("administrator/pages/forms.jsp");
 				break;
 			default:
 				break;
