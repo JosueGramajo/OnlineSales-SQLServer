@@ -42,10 +42,17 @@ public class ServletAgregarCategoria extends HttpServlet {
 		String nombre = request.getParameter("txtNombre");
 		String descripcion = request.getParameter("txtDescripcion");
 		
-		ManejadorCategorias.INSTANCIA.agregarCategoria(nombre, descripcion);
+		if(ManejadorCategorias.INSTANCIA.categoriaExist(nombre)) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=categories&error=Ya existe un producto con este nombre");
+			requestDispatcher.forward(request, response);
+		}else {
+			ManejadorCategorias.INSTANCIA.agregarCategoria(nombre, descripcion);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=categories");
+			requestDispatcher.forward(request, response);
+		}
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=categories");
-		requestDispatcher.forward(request, response);
+
 	}
 
 }

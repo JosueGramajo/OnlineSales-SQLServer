@@ -79,9 +79,23 @@ public class ManejadorCategorias {
 	}
 	public void agregarCategoria(String nombre,String descripcion) {
 		try {
-			Conexion.INSTANCIA.ejecutarConsulta("INSERT INTO Categoria values ('"+nombre+"','"+descripcion+"')");
+			String consulta = "INSERT INTO Categoria values ('"+nombre+"','"+descripcion+"')";
+			Conexion.INSTANCIA.ejecutarConsulta(consulta);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public boolean categoriaExist(String nombre) {
+		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select nombre from categoria where nombre='"+nombre+"'");
+		String nombreCategoria = "";
+		
+		try {
+			while(rSet.next()) {
+				nombreCategoria = rSet.getString("nombre");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nombreCategoria != ""?true:false;
 	}
 }

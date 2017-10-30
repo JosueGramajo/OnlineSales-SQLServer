@@ -38,4 +38,11 @@ public class ManejadorProducto {
 		
 		return list;
 	}
+	public void agregarProducto(String nombre, float precio, String imagen, String descripcion,
+			Integer existencias, Integer idCategoria, Integer rating) {
+		
+		
+		
+		
+	}
 }

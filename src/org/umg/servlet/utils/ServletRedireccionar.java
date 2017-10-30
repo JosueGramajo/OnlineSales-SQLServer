@@ -26,7 +26,10 @@ public class ServletRedireccionar extends HttpServlet {
 		// TODO Auto-generated method stub
 		RequestDispatcher despachador = null;
 		String page = peticion.getParameter("page");
+		String error = peticion.getParameter("error");
 		peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
+		
+		error = error == null ? "no" : error;
 
 		switch (page) {
 			case "dashboard":
@@ -45,6 +48,7 @@ public class ServletRedireccionar extends HttpServlet {
 				break;
 			case "categories":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+				peticion.setAttribute("error",error);
 				despachador = peticion.getRequestDispatcher("administrator/pages/categories_management.jsp");				
 				break;
 			case "categoriesUpdate":
@@ -52,6 +56,11 @@ public class ServletRedireccionar extends HttpServlet {
 				Categoria categoria = ManejadorCategorias.INSTANCIA.getCategoriaFromId(idCategoria);				
 				peticion.setAttribute("category", categoria);
 				despachador = peticion.getRequestDispatcher("administrator/pages/categories_update.jsp");
+				break;
+			case "products":
+				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+				peticion.setAttribute("listaProductos",ManejadorProducto.INSTANCIA.getProducts());
+				despachador = peticion.getRequestDispatcher("administrator/pages/products_management.jsp");				
 				break;
 			case "tables":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());

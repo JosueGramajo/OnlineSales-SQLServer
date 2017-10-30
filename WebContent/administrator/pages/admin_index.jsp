@@ -108,6 +108,9 @@
                             <a href="ServletRedireccionar.do?page=categories"><i class="fa fa-table fa-fw"></i> Categorias</a>
                         </li>
                         <li>
+                            <a href="ServletRedireccionar.do?page=products"><i class="fa fa-table fa-fw"></i> Productos</a>
+                        </li>
+                        <li>
                             <a href="ServletRedireccionar.do?page=tables"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
                         <li>

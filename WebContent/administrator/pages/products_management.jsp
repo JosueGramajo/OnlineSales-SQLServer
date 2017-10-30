@@ -48,6 +48,7 @@
 </head>
 
 <body>
+
 	<div id="wrapper">
 		<!-- Navigation -->
 		<nav class="navbar navbar-light navbar-static-top" role="navigation"
@@ -158,26 +159,16 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Categorias</h1>
+					<h1 class="page-header">Productos</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<a class="btn btn-success" href="#addCategoryModal"
-						class="btn btn-success" data-toggle="modal">Agregar Categoria</a>
-					<c:if test="${error != 'no'}">
-						<br><br>
-						<div class="alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-							${error}<a href="#" class="alert-link"></a>
-						</div>
-					</c:if>
+					<a class="btn btn-success" href="#addProductModal"
+						class="btn btn-success" data-toggle="modal">Agregar Productos</a>
 				</div>
-
-
 			</div>
 			<br>
 			<div class="row">
@@ -194,27 +185,32 @@
 									<tr>
 										<th>id</th>
 										<th>Nombre</th>
-										<th>Descripcion</th>
-										<th>Edit</th>
-										<th>Delete</th>
+										<th>Precio</th>
+										<th>Categoria</th>
+										<th>Imagen</th>
+										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="categoria" items="${listaCategorias}">
+									<c:forEach var="producto" items="${listaProductos}">
 										<tr class="odd gradeX">
-											<td>${categoria.getIdCategoria()}</td>
-											<td>${categoria.getNombre()}</td>
-											<td>${categoria.getDescripcion() }</td>
+											<td>${producto.getIdProducto()}</td>
+											<td>${producto.getNombre()}</td>
+											<td>${producto.getPrecio() }</td>
+											<td>${producto.getIdCategoria() }</td>
+											<td><img src="${producto.getImagen()}"
+												alt="Responsive Image" class="img-thumbnail"></td>
 											<td>
 												<form method="POST"
-													action="ServletRedireccionar.do?page=categoriesUpdate&idCategoria=${categoria.getIdCategoria()}">
+													action="ServletRedireccionar.do?page=categoriesUpdate&idCategoria=${producto.getIdProducto()}">
 													<input class="btn btn-info btn-block" type="submit"
 														value="Editar" />
 												</form>
 											</td>
 											<td>
 												<form method="POST"
-													action="ServletEliminarCategoria.do?idCategoria=${categoria.getIdCategoria()}">
+													action="ServletEliminarCategoria.do?idCategoria=${producto.getIdProducto()}">
 													<input class="btn btn-danger btn-block" type="submit"
 														value="Eliminar"
 														onclick="return confirm('Esta seguro que desea eliminar esta categoria? \n(Los productos que tengan la categoria eliminada pasaran a tener una categoria indefinida)')" />
@@ -238,12 +234,12 @@
 	<!-- /#wrapper -->
 
 	<!-- Edit Modal HTML -->
-	<div id="addCategoryModal" class="modal fade">
+	<div id="addProductModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form method="POST" action="ServletAgregarCategoria.do">
 					<div class="modal-header">
-						<h4 class="modal-title">Agregar Categoria</h4>
+						<h4 class="modal-title">Agregar Producto</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -253,8 +249,27 @@
 								name="txtNombre" required>
 						</div>
 						<div class="form-group">
+							<label>Precio</label> <input type="number" class="form-control"
+								name="txtPrecio" required>
+						</div>
+						<div class="form-group">
 							<label>Descripcion</label>
 							<textarea class="form-control" name="txtDescripcion"></textarea>
+						</div>
+						<div class="form-group">
+							<label>Categoria</label> 
+							<select class="form-control">
+								<c:forEach var="categoria" items="${listaCategorias }">
+									<option>${categoria.getNombre() }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Unidades en existencia</label> <input type="number"
+								class="form-control" name="txtPrecio" required>
+						</div>
+						<div class="form-group">
+							<label>Imagen</label> <input name="inputImage" type="file">
 						</div>
 					</div>
 					<div class="modal-footer">

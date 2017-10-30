@@ -224,7 +224,7 @@
                                         </div>
 
                                         
-                                        <a href="ServletRedireccionar.do?page=tables" class="btn btn-default">Cancelar</a>
+                                        <a href="ServletRedireccionar.do?page=categories" class="btn btn-default">Cancelar</a>
                                         <input type="submit" class="btn btn-success" value="Guardar Cambios"/>
                                     </form>
                                 </div>
