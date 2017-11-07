@@ -11,14 +11,14 @@ import oracle.net.aso.p;
 
 public class ManejadorProducto {
 	public static ManejadorProducto INSTANCIA = new ManejadorProducto();
-	
-	public ArrayList<Producto> getProducts(){
+
+	public ArrayList<Producto> getProducts() {
 		ArrayList<Producto> list = new ArrayList<Producto>();
 		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from producto order by nombre ASC");
-		
+
 		try {
 			Producto producto;
-			while(rSet.next()) {
+			while (rSet.next()) {
 				producto = new Producto();
 				producto.setIdProducto(rSet.getInt("idProducto"));
 				producto.setNombre(rSet.getString("nombre"));
@@ -28,21 +28,26 @@ public class ManejadorProducto {
 				producto.setExistencias(rSet.getInt("existencias"));
 				producto.setIdCategoria(rSet.getInt("idCategoria"));
 				producto.setRating(rSet.getInt("rating"));
-				
+
 				list.add(producto);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
-	public void agregarProducto(String nombre, float precio, String imagen, String descripcion,
-			Integer existencias, Integer idCategoria, Integer rating) {
-		
-		
-		
-		
+
+	public void agregarProducto(String nombre, String precio, String imagen, String descripcion, String existencias,
+			String idCategoria, String rating) {
+
+		try {
+			String consulta = "insert into producto values ('"+nombre+"',"+precio+",'"+imagen+"','"+descripcion+"',"+existencias+","+idCategoria+","+rating+")";
+			Conexion.INSTANCIA.ejecutarConsulta(consulta);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

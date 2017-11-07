@@ -199,7 +199,7 @@
 											<td>${producto.getNombre()}</td>
 											<td>${producto.getPrecio() }</td>
 											<td>${producto.getIdCategoria() }</td>
-											<td><img src="${producto.getImagen()}"
+											<td><img src="${producto.getImagen().trim()}"
 												alt="Responsive Image" class="img-thumbnail"></td>
 											<td>
 												<form method="POST"
@@ -237,7 +237,7 @@
 	<div id="addProductModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="POST" action="ServletAgregarCategoria.do">
+				<form method="POST" action="ServletAgregarProducto.do" encType="multipart/form-data">
 					<div class="modal-header">
 						<h4 class="modal-title">Agregar Producto</h4>
 						<button type="button" class="close" data-dismiss="modal"
@@ -258,7 +258,7 @@
 						</div>
 						<div class="form-group">
 							<label>Categoria</label> 
-							<select class="form-control">
+							<select class="form-control" name="category">
 								<c:forEach var="categoria" items="${listaCategorias }">
 									<option>${categoria.getNombre() }</option>
 								</c:forEach>
@@ -266,10 +266,10 @@
 						</div>
 						<div class="form-group">
 							<label>Unidades en existencia</label> <input type="number"
-								class="form-control" name="txtPrecio" required>
+								class="form-control" name="txtExistencias" required>
 						</div>
 						<div class="form-group">
-							<label>Imagen</label> <input name="inputImage" type="file">
+							<label>Imagen</label> <input type="file" name="file" id="file" value="select images..." accept="image/*"/>
 						</div>
 					</div>
 					<div class="modal-footer">

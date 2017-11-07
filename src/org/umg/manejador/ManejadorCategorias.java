@@ -10,6 +10,16 @@ import org.umg.db.Conexion;
 public class ManejadorCategorias {
 	public static ManejadorCategorias INSTANCIA = new ManejadorCategorias();
 	
+	public String getIdCategoriaFromName(String name) {
+		ArrayList<Categoria> lista = getCategorias();
+		for(Categoria categoria : lista) {
+			if(categoria.getNombre().trim().equalsIgnoreCase(name.trim())) {
+				return categoria.getIdCategoria().toString();
+			}
+		}
+		return "";
+	}
+	
 	public ArrayList<Categoria> getCategorias(){
 		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
 		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from categoria order by nombre ASC");
