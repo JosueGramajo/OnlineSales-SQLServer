@@ -24,6 +24,7 @@ public class ServletAutenticar extends HttpServlet {
 		RequestDispatcher despachador = null; 
 		String usuario = peticion.getParameter("txtUsuario");
 		String password = peticion.getParameter("txtPassword");
+		
 		Usuario aUsuario = ManejadorUsuario.INSTANCIA.doLogin(usuario, password);
 		
 		if(aUsuario.getIdUsuario() != -1) {
@@ -32,7 +33,7 @@ public class ServletAutenticar extends HttpServlet {
 			peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
 			peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 			peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
-			despachador = peticion.getRequestDispatcher("usuario/dashboard.jsp");
+			despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
 		}else {
 			peticion.setAttribute("estado", "Usuario o contraseña incorrectos");
 			despachador = peticion.getRequestDispatcher("index.jsp");

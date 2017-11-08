@@ -23,6 +23,7 @@ public class Conexion {
 			e.printStackTrace();
 		}
 	}
+	
 	public void ejecutarConsulta(String consulta){
 		try {
 			stm.execute(consulta);
@@ -31,6 +32,7 @@ public class Conexion {
 			e.printStackTrace();
 		}	
 	}
+	
 	public ResultSet obtenerConsulta(String consulta){
 		ResultSet rs=null;
 		try {

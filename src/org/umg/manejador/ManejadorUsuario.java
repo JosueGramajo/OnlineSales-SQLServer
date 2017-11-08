@@ -15,7 +15,7 @@ public class ManejadorUsuario {
 		Usuario usuario = new Usuario();
 		usuario.setIdUsuario(-1);
 		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select top 1 * from usuario where nick = '"+usr+"' and pass = '"+psw+"'");
-
+		//esto est un comentario
 		try {
 			while(rSet.next()) {
 				usuario.setIdUsuario(rSet.getInt("idUsuario"));

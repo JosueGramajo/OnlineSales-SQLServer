@@ -70,7 +70,7 @@ public class ServletAgregarProducto extends HttpServlet {
 	        ManejadorProducto.INSTANCIA.agregarProducto(nombre, precio, imagePath, descripcion, existencias, idCategoria, "0");
 
 	        try {
-				Thread.sleep(4000);
+				Thread.sleep(6000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Admin Console</title>
+<title>SB Admin 2 - Bootstrap Admin Theme</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
@@ -22,15 +22,6 @@
 
 <!-- MetisMenu CSS -->
 <link href="assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-<!-- DataTables CSS -->
-<link href="assets/vendor/datatables-plugins/dataTables.bootstrap.css"
-	rel="stylesheet">
-
-<!-- DataTables Responsive CSS -->
-<link
-	href="assets/vendor/datatables-responsive/dataTables.responsive.css"
-	rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="assets/dist/css/sb-admin-2.css" rel="stylesheet">
@@ -42,9 +33,10 @@
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-   <![endif]-->
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body>
@@ -65,7 +57,8 @@
 			<!-- /.navbar-header -->
 
 			<ul class="nav navbar-top-links navbar-right">
-				<li class="dropdown"><a class="dropdown-toggle" href="#"> <i
+				<li class="dropdown"><a class="dropdown-toggle"
+					href="ServletRedireccionar.do?page=administratorDashboard"> <i
 						class="fa fa-pencil-square-o" style="color: white;"> Consola
 							Administrativa</i>
 				</a></li>
@@ -114,6 +107,8 @@
 							</ul> <!-- /.nav-second-level --></li>
 						<li><a href="ServletRedireccionar.do?page=categories"><i
 								class="fa fa-table fa-fw"></i> Categorias</a></li>
+						<li><a href="ServletRedireccionar.do?page=products"><i
+								class="fa fa-table fa-fw"></i> Productos</a></li>
 						<li><a href="ServletRedireccionar.do?page=tables"><i
 								class="fa fa-table fa-fw"></i> Tables</a></li>
 						<li><a href="ServletRedireccionar.do?page=forms"><i
@@ -158,74 +153,40 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Categorias</h1>
+					<h1 class="page-header">Editar Categoria</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
 			<div class="row">
-				<div class="col-lg-4">
-					<a class="btn btn-success" href="#addCategoryModal"
-						class="btn btn-success" data-toggle="modal">Agregar Categoria</a>
-					<c:if test="${error != 'no'}">
-						<br><br>
-						<div class="alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
-							${error}<a href="#" class="alert-link"></a>
-						</div>
-					</c:if>
-				</div>
-
-
-			</div>
-			<br>
-			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Datos de las categorias
-							disponibles</div>
-						<!-- /.panel-heading -->
+						<div class="panel-heading">Datos de la categoria</div>
 						<div class="panel-body">
-							<table width="100%"
-								class="table table-striped table-bordered table-hover"
-								id="dataTables-example">
-								<thead>
-									<tr>
-										<th>id</th>
-										<th>Nombre</th>
-										<th>Descripcion</th>
-										<th>Edit</th>
-										<th>Delete</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="categoria" items="${listaCategorias}">
-										<tr class="odd gradeX">
-											<td>${categoria.getIdCategoria()}</td>
-											<td>${categoria.getNombre()}</td>
-											<td>${categoria.getDescripcion() }</td>
-											<td>
-												<form method="POST"
-													action="ServletRedireccionar.do?page=categoriesUpdate&idCategoria=${categoria.getIdCategoria()}">
-													<input class="btn btn-info btn-block" type="submit"
-														value="Editar" />
-												</form>
-											</td>
-											<td>
-												<form method="POST"
-													action="ServletEliminarCategoria.do?idCategoria=${categoria.getIdCategoria()}">
-													<input class="btn btn-danger btn-block" type="submit"
-														value="Eliminar"
-														onclick="return confirm('Esta seguro que desea eliminar esta categoria? \n(Los productos que tengan la categoria eliminada pasaran a tener una categoria indefinida)')" />
-												</form>
-											</td>
+							<div class="row">
+								<div class="col-lg-8">
+									<form method="POST"
+										action="ServletEditarCategoria.do?idCategoria=${category.getIdCategoria() }">
+										<div class="form-group">
+											<label>Nombre</label> <input name="txtNombre"
+												class="form-control" value="${category.getNombre() }">
+										</div>
+										<div class="form-group">
+											<label>Descripcion</label>
+											<textarea name="txtDescripcion" class="form-control" rows="3">${category.getDescripcion() }</textarea>
+										</div>
 
-										</tr>
-									</c:forEach>
 
-								</tbody>
-							</table>
+										<a href="ServletRedireccionar.do?page=categories"
+											class="btn btn-default">Cancelar</a> <input type="submit"
+											class="btn btn-success" value="Guardar Cambios" />
+									</form>
+								</div>
+								<!-- /.col-lg-6 (nested) -->
+
+								<!-- /.col-lg-6 (nested) -->
+							</div>
+							<!-- /.row (nested) -->
 						</div>
 						<!-- /.panel-body -->
 					</div>
@@ -233,39 +194,12 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
+			<!-- /.row -->
 		</div>
+		<!-- /#page-wrapper -->
+
 	</div>
 	<!-- /#wrapper -->
-
-	<!-- Edit Modal HTML -->
-	<div id="addCategoryModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form method="POST" action="ServletAgregarCategoria.do">
-					<div class="modal-header">
-						<h4 class="modal-title">Agregar Categoria</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Nombre</label> <input type="text" class="form-control"
-								name="txtNombre" required>
-						</div>
-						<div class="form-group">
-							<label>Descripcion</label>
-							<textarea class="form-control" name="txtDescripcion"></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal"
-							value="Cancelar"> <input type="submit"
-							class="btn btn-success" value="Agregar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 
 	<!-- jQuery -->
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
@@ -273,30 +207,11 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="assets/js/bootstrap-confirmation.js"></script>
-
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="assets/vendor/metisMenu/metisMenu.min.js"></script>
 
-	<!-- DataTables JavaScript -->
-	<script src="assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
-	<script
-		src="assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-	<script
-		src="assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
-
 	<!-- Custom Theme JavaScript -->
 	<script src="assets/dist/js/sb-admin-2.js"></script>
-
-	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-	<script>
-		$(document).ready(function() {
-			$('#dataTables-example').DataTable({
-				responsive : true
-			});
-		});
-	</script>
 
 </body>
 

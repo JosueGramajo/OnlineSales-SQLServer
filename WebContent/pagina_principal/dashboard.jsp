@@ -22,8 +22,9 @@
 <!-- Custom styles for this template -->
 <link href="assets/css/shop-homepage.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- Custom Fonts -->
+<link href="assets/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
 </head>
 
@@ -41,18 +42,21 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<c:if test="${usuario.getIdRol() == 1}">
-						<li class="fa nav-item">
-							<a class="nav-link" href="ServletRedireccionar.do?page=administratorDashboard"><i class="fa fa-pencil-square-o" style="color: #858a91;"></i>    Consola administrativa</a>
-						</li>
+						<li class="fa nav-item"><a class="nav-link"
+							href="ServletRedireccionar.do?page=administratorDashboard"><i
+								class="fa fa-pencil-square-o" style="color: #858a91;"></i>
+								Consola administrativa</a></li>
 					</c:if>
-					<li class="fa nav-item active"><a class="nav-link" href="#"><i class="fa fa-home"></i>    Pagina Principal
-							<span class="sr-only">(current)</span>
+					<li class="fa nav-item active"><a class="nav-link" href="#"><i
+							class="fa fa-home"></i> Pagina Principal <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="fa nav-item"><a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>    Carrito</a></li>
-					<li class="fa nav-item"><a class="nav-link" href="#"><i class="fa fa-info-circle"></i>    Acerca de</a>
-					</li>
-					<li class="fa nav-item"><a class="nav-link" href="ServletRedireccionar.do?page=logout"><i class="fa fa-sign-out fa-fw"></i>  Cerrar Sesion</a>
-					</li>
+					<li class="fa nav-item"><a class="nav-link" href="#"><i
+							class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito</a></li>
+					<li class="fa nav-item"><a class="nav-link" href="#"><i
+							class="fa fa-info-circle"></i> Acerca de</a></li>
+					<li class="fa nav-item"><a class="nav-link"
+						href="ServletRedireccionar.do?page=logout"><i
+							class="fa fa-sign-out fa-fw"></i> Cerrar Sesion</a></li>
 				</ul>
 			</div>
 		</div>
@@ -64,7 +68,6 @@
 		<div class="row">
 
 			<div class="col-lg-3">
-
 				<h1 class="my-4">${nombreUsuario }</h1>
 				<div class="list-group">
 					<c:forEach var="categoria" items="${listaCategorias}">
@@ -88,20 +91,20 @@
 					</ol>
 					<div class="carousel-inner" role="listbox">
 						<div class="carousel-item active">
-							<img class="d-block img-fluid" src="testAssets/banner1.png"
-								alt="First slide">
+							<img class="d-block img-fluid"
+								src="assets/img/banners/banner1.png" alt="First slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="testAssets/banner2.png"
-								alt="Second slide">
+							<img class="d-block img-fluid"
+								src="assets/img/banners/banner2.png" alt="Second slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="testAssets/banner3.png"
-								alt="Third slide">
+							<img class="d-block img-fluid"
+								src="assets/img/banners/banner3.png" alt="Third slide">
 						</div>
 						<div class="carousel-item">
-							<img class="d-block img-fluid" src="testAssets/banner4.png"
-								alt="Third slide">
+							<img class="d-block img-fluid"
+								src="assets/img/banners/banner4.png" alt="Third slide">
 						</div>
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -114,20 +117,20 @@
 						class="sr-only">Next</span>
 					</a>
 				</div>
-				
-			<div class="row">
-				<c:forEach var="producto" items="${listaProductos}">
-					
+
+				<div class="row">
+					<c:forEach var="producto" items="${listaProductos}">
+
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="${producto.getImagen()}" alt=""></a>
+								<a href="ServletRedireccionar.do?page=productDetail&productId=${producto.getIdProducto()}"><img
+									class="card-img-top" src="${producto.getImagen()}" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="#">${producto.getNombre()}</a>
+										<a href="ServletRedireccionar.do?page=productDetail&productId=${producto.getIdProducto()}">${producto.getNombre()}</a>
 									</h4>
-									<h5>$24.99</h5>
-									<p class="card-text">${producto.getImagen()}</p>
+									<h5>Q.${producto.getPrecio() }</h5>
+									<p class="card-text">${producto.getDescripcion()}</p>
 								</div>
 								<div class="card-footer">
 									<small class="text-muted">&#9733; &#9733; &#9733;
@@ -143,10 +146,10 @@
 								</c:if>
 							</div>
 						</div>
-						
-								
-				</c:forEach>
-			</div>	
+
+
+					</c:forEach>
+				</div>
 
 				<!-- /.row -->
 

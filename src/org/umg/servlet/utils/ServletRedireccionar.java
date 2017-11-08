@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.umg.bean.Categoria;
+import org.umg.bean.Producto;
 import org.umg.bean.Usuario;
 import org.umg.manejador.ManejadorCategorias;
 import org.umg.manejador.ManejadorProducto;
@@ -35,10 +36,19 @@ public class ServletRedireccionar extends HttpServlet {
 			case "dashboard":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 				peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
-				despachador = peticion.getRequestDispatcher("usuario/dashboard.jsp");
+				despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
+				break;
+			case "productDetail":
+				String idProducto = peticion.getParameter("productId");
+				Producto producto = ManejadorProducto.INSTANCIA.getProductById(idProducto);
+				peticion.setAttribute("producto", producto);
+				peticion.setAttribute("productosRelacionados", ManejadorProducto.INSTANCIA.getRelatedProducts(producto.getIdCategoria().toString(), idProducto));
+				peticion.setAttribute("categoria", ManejadorCategorias.INSTANCIA.getCategoriaFromId(producto.getIdCategoria().toString()));
+				despachador = peticion.getRequestDispatcher("detalle_producto/product_detail.jsp");
 				break;
 			case "administratorDashboard":
 				peticion.setAttribute("countCategorias", ManejadorCategorias.INSTANCIA.countCategorias());
+				peticion.setAttribute("countProductos", ManejadorProducto.INSTANCIA.countProductos());
 				despachador = peticion.getRequestDispatcher("administrator/pages/admin_index.jsp");
 				break;
 			case "logout":
@@ -49,18 +59,18 @@ public class ServletRedireccionar extends HttpServlet {
 			case "categories":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 				peticion.setAttribute("error",error);
-				despachador = peticion.getRequestDispatcher("administrator/pages/categories_management.jsp");				
+				despachador = peticion.getRequestDispatcher("mantenimientos/categoria/categories_management.jsp");				
 				break;
 			case "categoriesUpdate":
 				String idCategoria = peticion.getParameter("idCategoria");
 				Categoria categoria = ManejadorCategorias.INSTANCIA.getCategoriaFromId(idCategoria);				
 				peticion.setAttribute("category", categoria);
-				despachador = peticion.getRequestDispatcher("administrator/pages/categories_update.jsp");
+				despachador = peticion.getRequestDispatcher("mantenimientos/categoria/categories_update.jsp");
 				break;
 			case "products":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 				peticion.setAttribute("listaProductos",ManejadorProducto.INSTANCIA.getProducts());
-				despachador = peticion.getRequestDispatcher("administrator/pages/products_management.jsp");				
+				despachador = peticion.getRequestDispatcher("mantenimientos/producto/products_management.jsp");				
 				break;
 			case "tables":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
