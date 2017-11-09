@@ -6,6 +6,7 @@ public class Producto {
 	private float precio;
 	private String imagen;
 	private String descripcion;
+	private String estado;
 	private Integer existencias;
 	private Integer idCategoria;
 	private Integer rating;
@@ -14,7 +15,7 @@ public class Producto {
 		
 	}
 
-	public Producto(Integer idProducto, String nombre, float precio, String imagen, String descripcion,
+	public Producto(Integer idProducto, String nombre, float precio, String imagen, String descripcion, String estado,
 			Integer existencias, Integer idCategoria, Integer rating) {
 		super();
 		this.idProducto = idProducto;
@@ -22,6 +23,7 @@ public class Producto {
 		this.precio = precio;
 		this.imagen = imagen;
 		this.descripcion = descripcion;
+		this.estado = estado;
 		this.existencias = existencias;
 		this.idCategoria = idCategoria;
 		this.rating = rating;
@@ -36,7 +38,7 @@ public class Producto {
 	}
 
 	public String getNombre() {
-		return nombre.trim();
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -67,6 +69,14 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public Integer getExistencias() {
 		return existencias;
 	}
@@ -90,8 +100,8 @@ public class Producto {
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
-	
 
+	
 	
 	
 }

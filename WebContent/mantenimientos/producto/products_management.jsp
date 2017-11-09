@@ -48,164 +48,114 @@
 </head>
 
 <body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-light navbar-static-top" role="navigation" style="background-color: #343A40;">
-            <div class="navbar-header">	
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html" style="color: white;">Bienvenido ${usuario.getNombre()}</a>
-            </div>
-            <!-- /.navbar-header -->
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-light navbar-static-top" role="navigation"
+			style="background-color: #343A40;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html" style="color: white;">Bienvenido
+					${usuario.getNombre()}</a>
+			</div>
+			<!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="ServletRedireccionar.do?page=administratorDashboard">
-                        <i class="fa fa-pencil-square-o" style="color: white;">  Consola Administrativa</i>   
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-                <li class="">
-                    <a class="dropdown-toggle" href="ServletRedireccionar.do?page=dashboard">
-                        <i class="fa fa-home" style="color: #858a91;">  Pagina Principal</i>
-                    </a>
-                </li>
-                <li class="">
-                    <a class="dropdown-toggle" href="ServletRedireccionar.do?page=dashboard">
-                        <i class="fa fa-shopping-cart" style="color: #858a91;">  Carrito</i>
-                    </a>
-                </li>
-                <li class="">
-                    <a class="dropdown-toggle" href="ServletRedireccionar.do?page=dashboard">
-                        <i class="fa fa-info-circle" style="color: #858a91;">  Acerca de</i>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="ServletRedireccionar.do?page=logout">
-                        <i class="fa fa-sign-out" style="color: #858a91;">  Cerrar Sesion</i> 
-                    </a>
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					href="ServletRedireccionar.do?page=administratorDashboard"> <i
+						class="fa fa-pencil-square-o" style="color: white;"> Consola
+							Administrativa</i>
+				</a></li>
+				<!-- /.dropdown -->
+				<li class=""><a class="dropdown-toggle"
+					href="ServletRedireccionar.do?page=dashboard"> <i
+						class="fa fa-home" style="color: #858a91;"> Pagina Principal</i>
+				</a></li>
+				<li class=""><a class="dropdown-toggle"
+					href="ServletRedireccionar.do?page=dashboard"> <i
+						class="fa fa-shopping-cart" style="color: #858a91;"> Carrito</i>
+				</a></li>
+				<li class=""><a class="dropdown-toggle"
+					href="ServletRedireccionar.do?page=dashboard"> <i
+						class="fa fa-info-circle" style="color: #858a91;"> Acerca de</i>
+				</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					href="ServletRedireccionar.do?page=logout"> <i
+						class="fa fa-sign-out" style="color: #858a91;"> Cerrar Sesion</i>
+				</a></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="ServletRedireccionar.do?page=administratorDashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Flot Charts</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Morris.js Charts</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="ServletRedireccionar.do?page=categories"><i class="fa fa-table fa-fw"></i> Categorias</a>
-                        </li>
-                        <li>
-                            <a href="ServletRedireccionar.do?page=products"><i class="fa fa-table fa-fw"></i> Productos</a>
-                        </li>
-                        <li>
-                            <a href="ServletRedireccionar.do?page=tables"><i class="fa fa-table fa-fw"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="ServletRedireccionar.do?page=forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="sidebar-search">
+							<div class="input-group custom-search-form">
+								<input type="text" class="form-control" placeholder="Search...">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div> <!-- /input-group -->
+						</li>
+						<li><a
+							href="ServletRedireccionar.do?page=administratorDashboard"><i
+								class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+						<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
+								Charts<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="flot.html">Flot Charts</a></li>
+								<li><a href="morris.html">Morris.js Charts</a></li>
+							</ul> <!-- /.nav-second-level --></li>
+						<li><a href="ServletRedireccionar.do?page=categories"><i
+								class="fa fa-table fa-fw"></i> Categorias</a></li>
+						<li><a href="ServletRedireccionar.do?page=products"><i
+								class="fa fa-table fa-fw"></i> Productos</a></li>
+						<li><a href="ServletRedireccionar.do?page=tables"><i
+								class="fa fa-table fa-fw"></i> Tables</a></li>
+						<li><a href="ServletRedireccionar.do?page=forms"><i
+								class="fa fa-edit fa-fw"></i> Forms</a></li>
+						<li><a href="#"><i class="fa fa-wrench fa-fw"></i> UI
+								Elements<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="panels-wells.html">Panels and Wells</a></li>
+								<li><a href="buttons.html">Buttons</a></li>
+								<li><a href="notifications.html">Notifications</a></li>
+								<li><a href="typography.html">Typography</a></li>
+								<li><a href="icons.html"> Icons</a></li>
+								<li><a href="grid.html">Grid</a></li>
+							</ul> <!-- /.nav-second-level --></li>
+						<li><a href="#"><i class="fa fa-sitemap fa-fw"></i>
+								Multi-Level Dropdown<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#">Second Level Item</a></li>
+								<li><a href="#">Second Level Item</a></li>
+								<li><a href="#">Third Level <span class="fa arrow"></span></a>
+									<ul class="nav nav-third-level">
+										<li><a href="#">Third Level Item</a></li>
+										<li><a href="#">Third Level Item</a></li>
+										<li><a href="#">Third Level Item</a></li>
+										<li><a href="#">Third Level Item</a></li>
+									</ul> <!-- /.nav-third-level --></li>
+							</ul> <!-- /.nav-second-level --></li>
+						<li><a href="#"><i class="fa fa-files-o fa-fw"></i>
+								Sample Pages<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="blank.html">Blank Page</a></li>
+								<li><a href="login.html">Login Page</a></li>
+							</ul> <!-- /.nav-second-level --></li>
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
 		<!-- /navigation -->
 
 		<div id="page-wrapper">
@@ -238,7 +188,7 @@
 										<th>id</th>
 										<th>Nombre</th>
 										<th>Precio</th>
-										<th>Categoria</th>
+										<th>Estado</th>
 										<th>Imagen</th>
 										<th></th>
 										<th></th>
@@ -250,22 +200,17 @@
 											<td>${producto.getIdProducto()}</td>
 											<td>${producto.getNombre()}</td>
 											<td>${producto.getPrecio() }</td>
-											<td>${producto.getIdCategoria() }</td>
-											<td><img src="${producto.getImagen().trim()}"
-												alt="Responsive Image" class="img-thumbnail"></td>
+											<td>${producto.getEstado().toLowerCase() }</td>
+											<td><img src="${producto.getImagen().trim()}" alt="Responsive Image" class="img-thumbnail"></td>
 											<td>
-												<form method="POST"
-													action="ServletRedireccionar.do?page=categoriesUpdate&idCategoria=${producto.getIdProducto()}">
-													<input class="btn btn-info btn-block" type="submit"
-														value="Editar" />
+												<form method="POST" action="ServletRedireccionar.do?page=productsUpdate&idProducto=${producto.getIdProducto()}&returnPage=admin">
+													<input class="btn btn-info btn-block" type="submit" value="Editar" />
 												</form>
 											</td>
 											<td>
-												<form method="POST"
-													action="ServletEliminarCategoria.do?idCategoria=${producto.getIdProducto()}">
-													<input class="btn btn-danger btn-block" type="submit"
-														value="Eliminar"
-														onclick="return confirm('Esta seguro que desea eliminar esta categoria? \n(Los productos que tengan la categoria eliminada pasaran a tener una categoria indefinida)')" />
+												<form method="POST" action="ServletEliminarProducto.do?idProducto=${producto.getIdProducto()}&returnPage=admin">
+													<input class="btn btn-danger btn-block" type="submit" value="Eliminar"
+														onclick="return confirm('Esta seguro que desea eliminar este producto?')" />
 												</form>
 											</td>
 
@@ -302,8 +247,8 @@
 								name="txtNombre" required>
 						</div>
 						<div class="form-group">
-							<label>Precio</label> <input type="number" class="form-control"
-								name="txtPrecio" required>
+							<label>Precio</label> 
+							<input type="number" class="form-control" name="txtPrecio" required>
 						</div>
 						<div class="form-group">
 							<label>Descripcion</label>
@@ -318,8 +263,15 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Unidades en existencia</label> <input type="number"
-								class="form-control" name="txtExistencias" required>
+							<label>Unidades en existencia</label> 
+							<input type="number" class="form-control" name="txtExistencias" required>
+						</div>
+						<div class="form-group">
+							<label>Estado</label> <select class="form-control"
+								name="estadoProducto">
+								<option>Activo</option>
+								<option>Inactivo</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label>Imagen</label> <input type="file" name="file" id="file"

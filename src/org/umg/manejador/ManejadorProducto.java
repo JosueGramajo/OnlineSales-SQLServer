@@ -15,6 +15,33 @@ public class ManejadorProducto {
 
 	public ArrayList<Producto> getProducts() {
 		ArrayList<Producto> list = new ArrayList<Producto>();
+		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from producto where estado <> 'inactivo' order by nombre ASC");
+
+		try {
+			Producto producto;
+			while (rSet.next()) {
+				producto = new Producto();
+				producto.setIdProducto(rSet.getInt("idProducto"));
+				producto.setNombre(rSet.getString("nombre"));
+				producto.setPrecio(rSet.getFloat("precio"));
+				producto.setImagen(rSet.getString("imagen"));
+				producto.setDescripcion(rSet.getString("descripcion"));
+				producto.setEstado(rSet.getString("estado"));
+				producto.setExistencias(rSet.getInt("existencias"));
+				producto.setIdCategoria(rSet.getInt("idCategoria"));
+				producto.setRating(rSet.getInt("rating"));
+
+				list.add(producto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	public ArrayList<Producto> getAllProducts() {
+		ArrayList<Producto> list = new ArrayList<Producto>();
 		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from producto order by nombre ASC");
 
 		try {
@@ -26,6 +53,7 @@ public class ManejadorProducto {
 				producto.setPrecio(rSet.getFloat("precio"));
 				producto.setImagen(rSet.getString("imagen"));
 				producto.setDescripcion(rSet.getString("descripcion"));
+				producto.setEstado(rSet.getString("estado"));
 				producto.setExistencias(rSet.getInt("existencias"));
 				producto.setIdCategoria(rSet.getInt("idCategoria"));
 				producto.setRating(rSet.getInt("rating"));
@@ -40,17 +68,45 @@ public class ManejadorProducto {
 		return list;
 	}
 
-	public void agregarProducto(String nombre, String precio, String imagen, String descripcion, String existencias,
+	public void agregarProducto(String nombre, String precio, String imagen, String descripcion,String estado, String existencias,
 			String idCategoria, String rating) {
 
 		try {
-			String consulta = "insert into producto values ('"+nombre+"',"+precio+",'"+imagen+"','"+descripcion+"',"+existencias+","+idCategoria+","+rating+")";
+			String consulta = "insert into producto values ('"+nombre+"',"+precio+",'"+imagen+"','"+descripcion+"','"+estado+"',"+existencias+","+idCategoria+","+rating+")";
+			System.out.println(consulta);
 			Conexion.INSTANCIA.ejecutarConsulta(consulta);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
+	public void editarProducto(String idProducto, String nombre, String precio, String descripcion,String estado, String existencias,
+			String idCategoria) {
+
+		try {
+			String consulta = "update producto set nombre = '"+nombre+"', precio = "+precio+", descripcion = '"+descripcion+"'"
+					+ ", estado = '"+estado.toLowerCase()+"', existencias = "+existencias+", idCategoria = "+idCategoria
+					+" where idProducto = "+idProducto;
+			System.out.println(consulta);
+			Conexion.INSTANCIA.ejecutarConsulta(consulta);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public boolean eliminarProducto(String idProducto) {
+		try {
+			String consulta = "delete producto where idProducto = "+idProducto;
+			System.out.println(consulta);
+			Conexion.INSTANCIA.ejecutarConsulta(consulta);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public String countProductos() {
 		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select COUNT(idProducto) as count from producto");
 		String count = "";
@@ -75,6 +131,7 @@ public class ManejadorProducto {
 				producto.setPrecio(rSet.getFloat("precio"));
 				producto.setImagen(rSet.getString("imagen"));
 				producto.setDescripcion(rSet.getString("descripcion"));
+				producto.setEstado(rSet.getString("estado"));
 				producto.setExistencias(rSet.getInt("existencias"));
 				producto.setIdCategoria(rSet.getInt("idCategoria"));
 				producto.setRating(rSet.getInt("rating"));
@@ -87,7 +144,7 @@ public class ManejadorProducto {
 		return producto;
 	}
 	public ArrayList<Producto> getRelatedProducts(String idCategoria, String idProducto){
-		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select	top 4 * from producto where idCategoria = "+idCategoria+" and idProducto <> "+idProducto);
+		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select	top 4 * from producto where idCategoria = "+idCategoria+" and estado <> 'inactivo' and idProducto <> "+idProducto);
 		ArrayList<Producto> listaProductosRelacionados = new ArrayList<Producto>();
 		
 		try {
@@ -99,6 +156,7 @@ public class ManejadorProducto {
 				producto.setPrecio(rSet.getFloat("precio"));
 				producto.setImagen(rSet.getString("imagen"));
 				producto.setDescripcion(rSet.getString("descripcion"));
+				producto.setEstado(rSet.getString("estado"));
 				producto.setExistencias(rSet.getInt("existencias"));
 				producto.setIdCategoria(rSet.getInt("idCategoria"));
 				producto.setRating(rSet.getInt("rating"));

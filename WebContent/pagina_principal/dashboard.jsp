@@ -51,7 +51,7 @@
 							class="fa fa-home"></i> Pagina Principal <span class="sr-only">(current)</span>
 					</a></li>
 					<li class="fa nav-item"><a class="nav-link" href="#"><i
-							class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito</a></li>
+							class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito (${cantidadCarrito})</a></li>
 					<li class="fa nav-item"><a class="nav-link" href="#"><i
 							class="fa fa-info-circle"></i> Acerca de</a></li>
 					<li class="fa nav-item"><a class="nav-link"
@@ -138,10 +138,15 @@
 								</div>
 								<c:if test="${usuario.getIdRol() == 1}">
 									<div class="card-footer">
-										<button type="button" class="btn btn-danger btn-block">Eliminar</button>
+										<form method="POST" action="ServletEliminarProducto.do?idProducto=${producto.getIdProducto()}&returnPage=dashboard">
+											<input class="btn btn-danger btn-block" type="submit" value="Eliminar"
+														onclick="return confirm('Esta seguro que desea eliminar este producto?')" />
+										</form>								
 									</div>
 									<div class="card-footer">
-										<button type="button" class="btn btn-info btn-block">Editar</button>
+										<form method="POST" action="ServletRedireccionar.do?page=productsUpdate&idProducto=${producto.getIdProducto()}&returnPage=dashboard">
+											<input class="btn btn-info btn-block" type="submit" value="Editar" />
+										</form>
 									</div>
 								</c:if>
 							</div>

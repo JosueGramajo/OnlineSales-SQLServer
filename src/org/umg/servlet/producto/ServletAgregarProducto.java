@@ -66,8 +66,9 @@ public class ServletAgregarProducto extends HttpServlet {
 	        String descripcion = request.getParameter("txtDescripcion");
 	        String idCategoria = ManejadorCategorias.INSTANCIA.getIdCategoriaFromName(request.getParameter("category"));
 	        String existencias = request.getParameter("txtExistencias");
+	        String estado = request.getParameter("estadoProducto");
 	        
-	        ManejadorProducto.INSTANCIA.agregarProducto(nombre, precio, imagePath, descripcion, existencias, idCategoria, "0");
+	        ManejadorProducto.INSTANCIA.agregarProducto(nombre, precio, imagePath, descripcion,estado.toLowerCase(), existencias, idCategoria, "0");
 
 	        try {
 				Thread.sleep(6000);

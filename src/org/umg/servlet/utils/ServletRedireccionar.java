@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.umg.bean.Categoria;
 import org.umg.bean.Producto;
 import org.umg.bean.Usuario;
+import org.umg.manejador.ManejadorCarrito;
 import org.umg.manejador.ManejadorCategorias;
 import org.umg.manejador.ManejadorProducto;
 import org.umg.manejador.ManejadorUsuario;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 public class ServletRedireccionar extends HttpServlet {
 	@Override
@@ -29,6 +32,7 @@ public class ServletRedireccionar extends HttpServlet {
 		String page = peticion.getParameter("page");
 		String error = peticion.getParameter("error");
 		peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
+		peticion.setAttribute("cantidadCarrito", ManejadorCarrito.listaCarrito.size());
 		
 		error = error == null ? "no" : error;
 
@@ -69,15 +73,22 @@ public class ServletRedireccionar extends HttpServlet {
 				break;
 			case "products":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
-				peticion.setAttribute("listaProductos",ManejadorProducto.INSTANCIA.getProducts());
+				peticion.setAttribute("listaProductos",ManejadorProducto.INSTANCIA.getAllProducts());
 				despachador = peticion.getRequestDispatcher("mantenimientos/producto/products_management.jsp");				
 				break;
-			case "tables":
+			case "productsUpdate":
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
-				despachador = peticion.getRequestDispatcher("administrator/pages/tables.jsp");
+				peticion.setAttribute("producto", ManejadorProducto.INSTANCIA.getProductById(peticion.getParameter("idProducto")));
+				peticion.setAttribute("returnPage", peticion.getParameter("returnPage"));
+				despachador = peticion.getRequestDispatcher("mantenimientos/producto/products_update.jsp");				
 				break;
-			case "forms":
-				despachador = peticion.getRequestDispatcher("administrator/pages/forms.jsp");
+			case "cartConfirmation":
+				peticion.setAttribute("producto", ManejadorProducto.INSTANCIA.getProductById(peticion.getParameter("idProducto")));
+				despachador = peticion.getRequestDispatcher("carrito/product_added_confirmation.jsp");				
+				break;
+			case "checkout":
+				peticion.setAttribute("cartList", ManejadorCarrito.INSTANCIA.listaCarrito);
+				despachador = peticion.getRequestDispatcher("carrito/checkout.jsp");				
 				break;
 			default:
 				break;

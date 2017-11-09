@@ -166,20 +166,106 @@
 							<div class="row">
 								<div class="col-lg-8">
 									<form method="POST"
-										action="ServletEditarCategoria.do?idCategoria=${category.getIdCategoria() }">
+										action="ServletEditarProducto.do?idProducto=${producto.getIdProducto() }&returnPage=${returnPage}">
 										<div class="form-group">
 											<label>Nombre</label> <input name="txtNombre"
-												class="form-control" value="${category.getNombre() }">
+												class="form-control" value="${producto.getNombre() }">
+										</div>
+										<div class="form-group">
+											<label>Precio</label> <input name="txtPrecio"
+												class="form-control" type="number"
+												value="${producto.getPrecio() }">
 										</div>
 										<div class="form-group">
 											<label>Descripcion</label>
-											<textarea name="txtDescripcion" class="form-control" rows="3">${category.getDescripcion() }</textarea>
+											<textarea name="txtDescripcion" class="form-control" rows="3">${producto.getDescripcion() }</textarea>
 										</div>
+										<div class="form-group">
+											<label>Categoria</label> <select class="form-control"
+												name="category">
+												<option style="display: none"></option>
+												<c:forEach var="categoria" items="${listaCategorias }">
+													<c:choose>
+														<c:when
+															test="${categoria.getIdCategoria() == producto.getIdCategoria()}">
+															<option selected="selected">${categoria.getNombre() }</option>
+														</c:when>
+														<c:otherwise>
+															<option>${categoria.getNombre() }</option>
+														</c:otherwise>
+													</c:choose>
 
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Unidades en existencia</label> <input type="number"
+												class="form-control" name="txtExistencias"
+												value="${producto.getExistencias() }" required>
+										</div>
+										<div class="form-group">
+											<label>Estado</label> <select class="form-control" name="estadoProducto">
+												<c:choose>
+													<c:when test="${producto.getEstado() == 'activo'}">
+														<option selected="selected">Activo</option>
+													</c:when>
+													<c:otherwise>
+														<option>Activo</option>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${producto.getEstado() == 'inactivo'}">
+														<option selected="selected">Inactivo</option>
+													</c:when>
+													<c:otherwise>
+														<option>Inactivo</option>
+													</c:otherwise>
+												</c:choose>
+												
+											</select>
+										</div>
+										<!-- <div class="form-group">
+											<label>Imagen</label><br> 
+											<img src="${producto.getImagen().trim()}" alt="Responsive Image" class="img-thumbnail"> 
+											<input type="hidden" value="${producto.getImagen().trim()}" name="">
+											<input type="file" name="file" id="file" value="Reemplazar imagen..." accept="image/*" />
+											<output id="list"></output>
+											<script type="text/javascript">
+												if (window.FileReader) {
+													function handleFileSelect(evt) {
+														var files = evt.target.files;
+														var f = files[0];
+														var reader = new FileReader();
+														alert('wuto');
+														reader.onload = (function(
+																theFile) {
+															return function(e) {
+																document
+																		.getElementById('list').innerHTML = [ '<img src="', e.target.result,'" title="', theFile.name, '" width="50" />' ]
+																		.join('');
+															};
+														})(f);
 
-										<a href="ServletRedireccionar.do?page=categories"
-											class="btn btn-default">Cancelar</a> <input type="submit"
-											class="btn btn-success" value="Guardar Cambios" />
+														reader.readAsDataURL(f);
+													}
+												} else {
+													alert('This browser does not support FileReader');
+												}
+												document.getElementById('file').addEventListener('change',handleFileSelect,false);
+											</script>
+
+										</div>-->
+										
+										<c:choose>
+											<c:when test="${returnPage == 'admin'}">
+												<a href="ServletRedireccionar.do?page=products" class="btn btn-default">Cancelar</a> 
+											</c:when>
+											<c:otherwise>
+												<a href="ServletRedireccionar.do?page=dashboard" class="btn btn-default">Cancelar</a> 
+											</c:otherwise>
+										</c:choose>
+										
+										<input type="submit" class="btn btn-success" value="Guardar Cambios" />
 									</form>
 								</div>
 								<!-- /.col-lg-6 (nested) -->

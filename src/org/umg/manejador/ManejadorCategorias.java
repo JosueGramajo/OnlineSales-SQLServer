@@ -22,7 +22,7 @@ public class ManejadorCategorias {
 	
 	public ArrayList<Categoria> getCategorias(){
 		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from categoria order by nombre ASC");
+		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from categoria where idCategoria <> 1 order by nombre ASC");
 		try {
 			Categoria ct = null;
 			while(rSet.next()) {
