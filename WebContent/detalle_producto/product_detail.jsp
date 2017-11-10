@@ -72,7 +72,7 @@
 						</li>
 						<li class="fa nav-item">
 							<a class="nav-link" href="ServletRedireccionar.do?page=checkout">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito  (${cantidadCarrito})
 							</a>
 						</li>
 					</ul>
@@ -128,7 +128,7 @@
 									&#9734;</h4>
 							</div>
 
-							<form action="ServletAgregarCarrito.do?idProducto=${producto.getIdProducto() }" method="POST">
+							<form action="ServletAgregarCarrito.do?token=${token}&idProducto=${producto.getIdProducto() }" method="POST">
 								<p class="qty">Cantidad :</p>
 								<input min="1" type="number" id="quantity" name="txtCantidad" value="1" class="form-control input-small">
 								<div class="btn_form">

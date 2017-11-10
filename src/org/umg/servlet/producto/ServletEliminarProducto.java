@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.umg.manejador.ManejadorProducto;
+import org.umg.utils.SharedPreferences;
 
 /**
  * Servlet implementation class ServletEliminarProducto
@@ -39,12 +40,12 @@ public class ServletEliminarProducto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		String token = request.getParameter("token");
 		String idProduto = request.getParameter("idProducto");
 		String returnPage = request.getParameter("returnPage");
 		
-		boolean resultado = ManejadorProducto.INSTANCIA.eliminarProducto(idProduto);
-		
-		if(resultado) {
+		if(token.equals(SharedPreferences.INSTANCIA.getToken())) {
 			RequestDispatcher requestDispatcher = null;
 			if(returnPage.equals("dashboard")) {
 				requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=dashboard");
@@ -52,7 +53,33 @@ public class ServletEliminarProducto extends HttpServlet {
 				requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=products");
 			}
 			requestDispatcher.forward(request, response);
+		}else {
+			// TODO Auto-generated method stub
+			SharedPreferences.INSTANCIA.setToken(token);
+			request.setAttribute("token", SharedPreferences.INSTANCIA.generateToken());
+
+			boolean resultado = ManejadorProducto.INSTANCIA.eliminarProducto(idProduto);
+			
+			if(resultado) {
+				RequestDispatcher requestDispatcher = null;
+				if(returnPage.equals("dashboard")) {
+					requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=dashboard");
+				}else if(returnPage.equals("admin")) {
+					requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=products");
+				}
+				requestDispatcher.forward(request, response);
+			}else{
+				ManejadorProducto.INSTANCIA.inhabilitarProducto(idProduto);
+				RequestDispatcher requestDispatcher = null;
+				if(returnPage.equals("dashboard")) {
+					requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=dashboard&error=El producto ya se encuentra facturado en mas de 1 pedido, no se pude eliminar, el producto fue deshabilitado");
+				}else if(returnPage.equals("admin")) {
+					requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=products&error=El producto ya se encuentra facturado en mas de 1 pedido, no se pude eliminar, el producto fue deshabilitado");
+				}
+				requestDispatcher.forward(request, response);
+			}
 		}
+
 	}
 
 }

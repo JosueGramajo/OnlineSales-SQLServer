@@ -999,14 +999,14 @@ div.register-bottom-grid {
   margin-top: 3em;
 }
 .delivery p {
-  color: #A6A6A6;
-  font-size: 1em;
+  color: #000000;
+  font-size: 2em;
   font-weight: 400;
   float: left;
 }
 .delivery span {
-  color: #A6A6A6;
-  font-size: 1em;
+  color: #000000;
+  font-size: 2em;
   font-weight: 400;
   float: right;
 }

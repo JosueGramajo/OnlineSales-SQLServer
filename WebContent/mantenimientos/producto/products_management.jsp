@@ -160,6 +160,21 @@
 
 		<div id="page-wrapper">
 			<div class="row">
+				<div class="col-lg-4">
+					<c:if test="${error != 'no'}">
+						<br>
+						<br>
+						<div class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							${error}<a href="#" class="alert-link"></a>
+						</div>
+					</c:if>
+				</div>
+
+
+			</div>
+			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Productos</h1>
 				</div>
@@ -208,7 +223,7 @@
 												</form>
 											</td>
 											<td>
-												<form method="POST" action="ServletEliminarProducto.do?idProducto=${producto.getIdProducto()}&returnPage=admin">
+												<form method="POST" action="ServletEliminarProducto.do?token=${token}&idProducto=${producto.getIdProducto()}&returnPage=admin">
 													<input class="btn btn-danger btn-block" type="submit" value="Eliminar"
 														onclick="return confirm('Esta seguro que desea eliminar este producto?')" />
 												</form>
@@ -234,7 +249,7 @@
 	<div id="addProductModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="POST" action="ServletAgregarProducto.do"
+				<form method="POST" action="ServletAgregarProducto.do?token=${token}"
 					encType="multipart/form-data">
 					<div class="modal-header">
 						<h4 class="modal-title">Agregar Producto</h4>

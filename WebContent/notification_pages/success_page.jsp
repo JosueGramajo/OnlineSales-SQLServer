@@ -86,13 +86,10 @@
 			<div class="row text-center">
 				<div class=".col-md-6 .col-md-offset-3">
 					<br> <br>
-					<h2 style="color: #0fad00">Producto agregado al carrito!!!</h2>
-					<img src="${producto.getImagen()}">
+					<h2 style="color: #0fad00">Se realizo la compra con exito!!!</h2>
+					<img src="assets/img/check.png">
 					<h1>${producto.getNombre() }</h1>
-					<p style="font-size: 20px; color: #5C5C5C;">Agregaste este
-						producto a tu carrito de compras. Para adquirir dicho producto,
-						preciona el boton "Proceder al pago"</p><br><br>
-					<a href="ServletRedireccionar.do?page=checkout" class="btn btn-success">     Proceder al pago     </a> <br><br>
+					<p style="font-size: 20px; color: #5C5C5C;">Gracias por tu preferencia y realizar tu compra con nosotros, esperamos que vuelvas pronto</p><br><br>
 					<a href="ServletRedireccionar.do?page=dashboard"
 						class="btn btn-default">     Continuar Comprando     </a> <br>
 					<br>

@@ -16,6 +16,7 @@ import org.umg.manejador.ManejadorCarrito;
 import org.umg.manejador.ManejadorCategorias;
 import org.umg.manejador.ManejadorProducto;
 import org.umg.manejador.ManejadorUsuario;
+import org.umg.utils.SharedPreferences;
 
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
@@ -33,11 +34,21 @@ public class ServletRedireccionar extends HttpServlet {
 		String error = peticion.getParameter("error");
 		peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
 		peticion.setAttribute("cantidadCarrito", ManejadorCarrito.listaCarrito.size());
+		peticion.setAttribute("token", SharedPreferences.INSTANCIA.generateToken());
 		
 		error = error == null ? "no" : error;
 
 		switch (page) {
+			case "firstDashboard":
+				peticion.setAttribute("error",error);
+				peticion.setAttribute("nombreUsuario", peticion.getParameter("usuario"));
+				peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
+				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+				peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
+				despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
+				break;
 			case "dashboard":
+				peticion.setAttribute("error",error);
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 				peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
 				despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
@@ -72,6 +83,7 @@ public class ServletRedireccionar extends HttpServlet {
 				despachador = peticion.getRequestDispatcher("mantenimientos/categoria/categories_update.jsp");
 				break;
 			case "products":
+				peticion.setAttribute("error",error);
 				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
 				peticion.setAttribute("listaProductos",ManejadorProducto.INSTANCIA.getAllProducts());
 				despachador = peticion.getRequestDispatcher("mantenimientos/producto/products_management.jsp");				
@@ -88,7 +100,11 @@ public class ServletRedireccionar extends HttpServlet {
 				break;
 			case "checkout":
 				peticion.setAttribute("cartList", ManejadorCarrito.INSTANCIA.listaCarrito);
+				peticion.setAttribute("total", ManejadorCarrito.INSTANCIA.getTotal());
 				despachador = peticion.getRequestDispatcher("carrito/checkout.jsp");				
+				break;
+			case "success":
+				despachador = peticion.getRequestDispatcher("notification_pages/success_page.jsp");		
 				break;
 			default:
 				break;

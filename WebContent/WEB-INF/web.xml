@@ -76,6 +76,22 @@
     <servlet-name>ServletAgregarCarrito</servlet-name>
     <url-pattern>/ServletAgregarCarrito.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletEliminarCarrito</servlet-name>
+    <servlet-class>org.umg.servlet.carrito.ServletEliminarCarrito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletEliminarCarrito</servlet-name>
+    <url-pattern>/ServletEliminarCarrito.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletRealizarCompra</servlet-name>
+    <servlet-class>org.umg.servlet.compra.ServletRealizarCompra</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletRealizarCompra</servlet-name>
+    <url-pattern>/ServletRealizarCompra.do</url-pattern>
+  </servlet-mapping>
   <jsp-config>
     <taglib>
       <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>

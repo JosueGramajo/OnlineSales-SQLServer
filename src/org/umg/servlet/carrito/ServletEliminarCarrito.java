@@ -16,16 +16,16 @@ import org.umg.manejador.ManejadorProducto;
 import org.umg.utils.SharedPreferences;
 
 /**
- * Servlet implementation class ServletAgregarCarrito
+ * Servlet implementation class ServletEliminarCarrito
  */
-@WebServlet("/ServletAgregarCarrito")
-public class ServletAgregarCarrito extends HttpServlet {
+@WebServlet("/ServletEliminarCarrito")
+public class ServletEliminarCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAgregarCarrito() {
+    public ServletEliminarCarrito() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,9 +42,11 @@ public class ServletAgregarCarrito extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
 		String token = request.getParameter("token");
 		if(token.equals(SharedPreferences.INSTANCIA.getToken())) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=cartConfirmation");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=checkout");
 			requestDispatcher.forward(request, response);	
 		}else {
 			// TODO Auto-generated method stub
@@ -52,16 +54,12 @@ public class ServletAgregarCarrito extends HttpServlet {
 			request.setAttribute("token", SharedPreferences.INSTANCIA.generateToken());
 			
 			String idProducto = request.getParameter("idProducto");
-			String cantidad = request.getParameter("txtCantidad");
 			
-			Producto producto = ManejadorProducto.INSTANCIA.getProductById(idProducto);
+			ManejadorCarrito.INSTANCIA.deleteFromCart(idProducto);
 			
-			ManejadorCarrito.listaCarrito.add(new CartItem(producto,Integer.parseInt(cantidad)));
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=cartConfirmation");
-			requestDispatcher.forward(request, response);			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=checkout");
+			requestDispatcher.forward(request, response);	
 		}
-
 	}
 
 }

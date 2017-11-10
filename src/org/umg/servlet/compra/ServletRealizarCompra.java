@@ -1,4 +1,4 @@
-package org.umg.servlet.carrito;
+package org.umg.servlet.compra;
 
 import java.io.IOException;
 
@@ -12,20 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.umg.bean.CartItem;
 import org.umg.bean.Producto;
 import org.umg.manejador.ManejadorCarrito;
+import org.umg.manejador.ManejadorCompra;
 import org.umg.manejador.ManejadorProducto;
 import org.umg.utils.SharedPreferences;
 
 /**
- * Servlet implementation class ServletAgregarCarrito
+ * Servlet implementation class ServletRealizarCompra
  */
-@WebServlet("/ServletAgregarCarrito")
-public class ServletAgregarCarrito extends HttpServlet {
+@WebServlet("/ServletRealizarCompra")
+public class ServletRealizarCompra extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletAgregarCarrito() {
+    public ServletRealizarCompra() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,26 +43,26 @@ public class ServletAgregarCarrito extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String token = request.getParameter("token");
 		if(token.equals(SharedPreferences.INSTANCIA.getToken())) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=cartConfirmation");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=success");
 			requestDispatcher.forward(request, response);	
 		}else {
 			// TODO Auto-generated method stub
 			SharedPreferences.INSTANCIA.setToken(token);
 			request.setAttribute("token", SharedPreferences.INSTANCIA.generateToken());
 			
-			String idProducto = request.getParameter("idProducto");
-			String cantidad = request.getParameter("txtCantidad");
+			String nombre = request.getParameter("txtNombre");
+			String direccion = request.getParameter("txtDireccion");
+			String nit = request.getParameter("txtNit");
+			String total = request.getParameter("txtTotal");
 			
-			Producto producto = ManejadorProducto.INSTANCIA.getProductById(idProducto);
+			ManejadorCompra.INSTANCIA.agregarFactura(nombre, direccion, nit, total);
 			
-			ManejadorCarrito.listaCarrito.add(new CartItem(producto,Integer.parseInt(cantidad)));
-			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=cartConfirmation");
-			requestDispatcher.forward(request, response);			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ServletRedireccionar.do?page=success");
+			requestDispatcher.forward(request, response);	
 		}
-
 	}
 
 }

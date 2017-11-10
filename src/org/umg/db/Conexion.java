@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 public class Conexion {
 	private Connection conexion;
@@ -31,6 +32,10 @@ public class Conexion {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+	}
+	
+	public void ejecutarConsultaCascada(String consulta) throws Exception{
+		stm.execute(consulta);
 	}
 	
 	public ResultSet obtenerConsulta(String consulta){

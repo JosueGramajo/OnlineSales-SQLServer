@@ -64,7 +64,19 @@
 
 	<!-- Page Content -->
 	<div class="container">
-
+			<div class="row">
+				<div class="col-lg-4">
+					<c:if test="${error != 'no'}">
+						<br>
+						<br>
+						<div class="alert alert-danger alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							${error}<a href="#" class="alert-link"></a>
+						</div>
+					</c:if>
+				</div>
+			</div>
 		<div class="row">
 
 			<div class="col-lg-3">
@@ -138,7 +150,7 @@
 								</div>
 								<c:if test="${usuario.getIdRol() == 1}">
 									<div class="card-footer">
-										<form method="POST" action="ServletEliminarProducto.do?idProducto=${producto.getIdProducto()}&returnPage=dashboard">
+										<form method="POST" action="ServletEliminarProducto.do?token=${token}&idProducto=${producto.getIdProducto()}&returnPage=dashboard">
 											<input class="btn btn-danger btn-block" type="submit" value="Eliminar"
 														onclick="return confirm('Esta seguro que desea eliminar este producto?')" />
 										</form>								

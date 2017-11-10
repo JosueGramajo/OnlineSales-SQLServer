@@ -29,11 +29,9 @@ public class ServletAutenticar extends HttpServlet {
 		
 		if(aUsuario.getIdUsuario() != -1) {
 			ManejadorUsuario.sessionUser = aUsuario;
-			peticion.setAttribute("nombreUsuario", usuario);
-			peticion.setAttribute("usuario", ManejadorUsuario.sessionUser);
-			peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
-			peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
-			despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
+			peticion.setAttribute("usuario", usuario);
+			despachador = peticion.getRequestDispatcher("ServletRedireccionar.do?page=firstDashboard");
+			
 		}else {
 			peticion.setAttribute("estado", "Usuario o contraseña incorrectos");
 			despachador = peticion.getRequestDispatcher("index.jsp");

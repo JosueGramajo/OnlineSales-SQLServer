@@ -7,12 +7,13 @@ public class Factura {
 	private Integer noFactura;
 	private float total;
 	private String fecha;
+	private Integer idUsuario;
 	
 	public Factura() {
 		
 	}
 	
-	public Factura(Integer idFactura, String nombre, String nit, Integer noFactura, float total, String fecha) {
+	public Factura(Integer idFactura, String nombre, String nit, Integer noFactura, float total, String fecha, Integer idUsuario) {
 		super();
 		this.idFactura = idFactura;
 		this.nombre = nombre;
@@ -20,6 +21,7 @@ public class Factura {
 		this.noFactura = noFactura;
 		this.total = total;
 		this.fecha = fecha;
+		this.idUsuario = idUsuario;
 	}
 	public Integer getIdFactura() {
 		return idFactura;
@@ -56,6 +58,14 @@ public class Factura {
 	}
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 	

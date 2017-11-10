@@ -99,7 +99,7 @@ public class ManejadorProducto {
 		try {
 			String consulta = "delete producto where idProducto = "+idProducto;
 			System.out.println(consulta);
-			Conexion.INSTANCIA.ejecutarConsulta(consulta);
+			Conexion.INSTANCIA.ejecutarConsultaCascada(consulta);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,5 +169,13 @@ public class ManejadorProducto {
 		}
 
 		return listaProductosRelacionados;
+	}
+	
+	public void inhabilitarProducto(String idProducto) {
+		try {
+			Conexion.INSTANCIA.ejecutarConsultaCascada("update producto set estado='inactivo' where idProducto = "+idProducto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
