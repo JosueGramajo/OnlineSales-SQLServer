@@ -20,13 +20,7 @@
 	content="Swim Wear Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <script type="application/x-javascript">
-	
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
-
 </script>
 
 <script src="assets/detail_resources/js/jquery.min.js"></script>
@@ -114,10 +108,16 @@
 	
 					<div  style="text-align: right">
 						<h1>Total : Q.${total}</h1>
-					</div>
+					</div><br><br>
 					<div style="text-align: right;">
-						<a class="btn btn-success" href="#addCategoryModal"
-						class="btn btn-success" data-toggle="modal">REALIZAR COMPRA</a>
+						<c:choose>
+							<c:when test="${cartList.size() == 0}">
+								<a class="btn btn-success" href="ServletRedireccionar.do?page=dashboard" class="btn btn-success">REGRESAR</a>
+							</c:when>
+							<c:otherwise>
+								<a class="btn btn-success" href="#addCategoryModal" class="btn btn-success" data-toggle="modal">REALIZAR COMPRA</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					
 				</div>

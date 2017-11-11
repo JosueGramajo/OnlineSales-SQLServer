@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
+<title>Admin Console</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
@@ -22,6 +22,15 @@
 
 <!-- MetisMenu CSS -->
 <link href="assets/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+<!-- DataTables CSS -->
+<link href="assets/vendor/datatables-plugins/dataTables.bootstrap.css"
+	rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link
+	href="assets/vendor/datatables-responsive/dataTables.responsive.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="assets/dist/css/sb-admin-2.css" rel="stylesheet">
@@ -33,10 +42,9 @@
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->
 </head>
 
 <body>
@@ -112,51 +120,55 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Editar Categoria</h1>
+					<h1 class="page-header">Compras</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+
+			<br>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Datos de la categoria</div>
+						<div class="panel-heading">Datos de la compra</div>
 						<div class="panel-body">
-							<div class="row">
-								<div class="col-lg-8">
-									<form method="POST"
-										action="ServletEditarCategoria.do?idCategoria=${category.getIdCategoria() }">
-										<div class="form-group">
-											<label>Nombre</label> <input name="txtNombre"
-												class="form-control" value="${category.getNombre() }">
-										</div>
-										<div class="form-group">
-											<label>Descripcion</label>
-											<textarea name="txtDescripcion" class="form-control" rows="3">${category.getDescripcion() }</textarea>
-										</div>
-
-
-										<a href="ServletRedireccionar.do?page=categories"
-											class="btn btn-default">Cancelar</a> <input type="submit"
-											class="btn btn-success" value="Guardar Cambios" />
-									</form>
+							<h3 id="grid-nesting">No Factura: ${compra.getNoFactura()}<h3>
+							<h3 id="grid-nesting">Nombre: ${compra.getNombre()}<h3>
+							<h3 id="grid-nesting">Nit: ${compra.getNit()}<h3>
+							<h3 id="grid-nesting">Direccion: ${compra.getDireccion()}<h3>
+							<h3 id="grid-nesting">Fecha: ${compra.getFecha()}<h3>
+							<br>
+							<h3 id="grid-nesting">Detalle de compra:<h3>
+							<c:forEach var="item" items="${compra.getDetalle()}">
+								<div class="row show-grid">
+							        <div class="col-lg-12">
+							            <div class="media">
+							              <div class="media-left">
+							                <a href="#">
+							                  <img style="height: 80px; width: 80px;" class="media-object" src="${item.getProducto().getImagen() }" alt="...">
+							                </a>
+							              </div>
+							              <div class="media-body">
+							                <h4 class="media-heading">Nombre: ${item.getProducto().getNombre()}</h4>
+							                <h4 class="media-heading">Cantidad: ${item.getCantidad()}</h4>
+							                <h4 class="media-heading" style="float: left;">Precio: Q.${item.getProducto().getPrecio()}</h4>
+							                <h4 class="media-heading" style="float: right;">Subtotal: Q.${item.getCantidad() * item.getProducto().getPrecio()}</h4>
+							              </div>
+							            </div>
+							        </div>
 								</div>
-								<!-- /.col-lg-6 (nested) -->
-
-								<!-- /.col-lg-6 (nested) -->
-							</div>
-							<!-- /.row (nested) -->
+							</c:forEach>
+							
+							<h4 style="float: right;">Total: Q.${compra.getTotal()}</h4>
 						</div>
+
 						<!-- /.panel-body -->
 					</div>
 					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			<!-- /.row -->
 		</div>
-		<!-- /#page-wrapper -->
-
 	</div>
 	<!-- /#wrapper -->
 
@@ -166,11 +178,30 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
+	<!-- Bootstrap Core JavaScript -->
+	<script src="assets/js/bootstrap-confirmation.js"></script>
+
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="assets/vendor/metisMenu/metisMenu.min.js"></script>
 
+	<!-- DataTables JavaScript -->
+	<script src="assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script
+		src="assets/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+	<script
+		src="assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
 	<!-- Custom Theme JavaScript -->
 	<script src="assets/dist/js/sb-admin-2.js"></script>
+
+	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable({
+				responsive : true
+			});
+		});
+	</script>
 
 </body>
 

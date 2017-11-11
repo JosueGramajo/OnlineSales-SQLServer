@@ -14,7 +14,9 @@ import org.umg.bean.Producto;
 import org.umg.bean.Usuario;
 import org.umg.manejador.ManejadorCarrito;
 import org.umg.manejador.ManejadorCategorias;
+import org.umg.manejador.ManejadorCompra;
 import org.umg.manejador.ManejadorProducto;
+import org.umg.manejador.ManejadorRol;
 import org.umg.manejador.ManejadorUsuario;
 import org.umg.utils.SharedPreferences;
 
@@ -53,6 +55,13 @@ public class ServletRedireccionar extends HttpServlet {
 				peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProducts());
 				despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
 				break;
+			case "filterDashboard":
+				peticion.setAttribute("error",error);
+				peticion.setAttribute("listaCategorias",ManejadorCategorias.INSTANCIA.getCategorias());
+				peticion.setAttribute("listaProductos", ManejadorProducto.INSTANCIA.getProductsByCategory(peticion.getParameter("idCategoria")));
+				peticion.setAttribute("hideCarousel", "true");
+				despachador = peticion.getRequestDispatcher("pagina_principal/dashboard.jsp");
+				break;
 			case "productDetail":
 				String idProducto = peticion.getParameter("productId");
 				Producto producto = ManejadorProducto.INSTANCIA.getProductById(idProducto);
@@ -64,10 +73,13 @@ public class ServletRedireccionar extends HttpServlet {
 			case "administratorDashboard":
 				peticion.setAttribute("countCategorias", ManejadorCategorias.INSTANCIA.countCategorias());
 				peticion.setAttribute("countProductos", ManejadorProducto.INSTANCIA.countProductos());
+				peticion.setAttribute("countUsuarios", ManejadorUsuario.INSTANCIA.countUsuarios());
+				peticion.setAttribute("countCompras", ManejadorCompra.INSTANCIA.countCompra());
 				despachador = peticion.getRequestDispatcher("administrator/pages/admin_index.jsp");
 				break;
 			case "logout":
 				ManejadorUsuario.sessionUser = new Usuario();
+				ManejadorCarrito.listaCarrito.clear();
 				peticion.setAttribute("estado", "");	
 				despachador = peticion.getRequestDispatcher("index.jsp");
 				break;
@@ -105,6 +117,26 @@ public class ServletRedireccionar extends HttpServlet {
 				break;
 			case "success":
 				despachador = peticion.getRequestDispatcher("notification_pages/success_page.jsp");		
+				break;
+			case "users":
+				peticion.setAttribute("listaUsuarios", ManejadorUsuario.INSTANCIA.getUsers());
+				peticion.setAttribute("listaRoles", ManejadorRol.INSTANCIA.getRols());
+				peticion.setAttribute("usuarioActual", ManejadorUsuario.sessionUser);
+				peticion.setAttribute("error", error);
+				despachador = peticion.getRequestDispatcher("mantenimientos/usuario/users_management.jsp");
+				break;
+			case "userUpdate":
+				peticion.setAttribute("usuario", ManejadorUsuario.INSTANCIA.getUserById(peticion.getParameter("idUsuario")));
+				peticion.setAttribute("listaRoles", ManejadorRol.INSTANCIA.getRols());
+				despachador = peticion.getRequestDispatcher("mantenimientos/usuario/users_update.jsp");
+				break;
+			case "sales":
+				peticion.setAttribute("listaCompras", ManejadorCompra.INSTANCIA.getCompras());
+				despachador = peticion.getRequestDispatcher("mantenimientos/compras/sales_management.jsp");
+				break;
+			case "saleDetail":
+				peticion.setAttribute("compra", ManejadorCompra.INSTANCIA.getCompraUsuario(peticion.getParameter("idFactura")));
+				despachador = peticion.getRequestDispatcher("mantenimientos/compras/sale_detail.jsp");
 				break;
 			default:
 				break;

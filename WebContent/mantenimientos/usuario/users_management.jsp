@@ -85,7 +85,6 @@
 				</a></li>
 				<!-- /.dropdown -->
 			</ul>
-			
 			<!-- /.navbar-top-links -->
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
@@ -115,23 +114,21 @@
 				</div>
 				<!-- /.sidebar-collapse -->
 			</div>
-			
-			<!-- /.navbar-static-side -->
 		</nav>
 		<!-- /navigation -->
 
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Categorias</h1>
+					<h1 class="page-header">Usuarios</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<a class="btn btn-success" href="#addCategoryModal"
-						class="btn btn-success" data-toggle="modal">Agregar Categoria</a>
+					<a class="btn btn-success" href="#addUserModal"
+						class="btn btn-success" data-toggle="modal">Agregar Usuario</a>
 					<c:if test="${error != 'no'}">
 						<br>
 						<br>
@@ -160,32 +157,45 @@
 									<tr>
 										<th>id</th>
 										<th>Nombre</th>
-										<th>Descripcion</th>
+										<th>Correo</th>
+										<th>Nick</th>
+										<th>Rol</th>
+										<th>Estado</th>
 										<th>Edit</th>
 										<th>Delete</th>
 									</tr>
 								</thead>
 								<!-- Esto es el cuerpo de la tabla aqui se hace tal lsdjflsd -->
 								<tbody>
-									<c:forEach var="categoria" items="${listaCategorias}">
+									<c:forEach var="usuario" items="${listaUsuarios}">
 										<tr class="odd gradeX">
-											<td>${categoria.getIdCategoria()}</td>
-											<td>${categoria.getNombre()}</td>
-											<td>${categoria.getDescripcion() }</td>
+											<td>${usuario.getIdUsuario()}</td>
+											<td>${usuario.getNombre()}</td>
+											<td>${usuario.getEmail() }</td>
+											<td>${usuario.getNick() }</td>
+											<c:forEach var="rol" items="${listaRoles}">
+												<c:if test="${rol.getIdRol() == usuario.getIdRol() }">
+													<td>${rol.getNombre() }</td>
+												</c:if>
+											</c:forEach>
+											<td>${usuario.getEstado() }</td>
 											<td>
-												<form method="POST"
-													action="ServletRedireccionar.do?page=categoriesUpdate&idCategoria=${categoria.getIdCategoria()}">
-													<input class="btn btn-info btn-block" type="submit"
-														value="Editar" />
+												<form method="POST" action="ServletRedireccionar.do?page=userUpdate&idUsuario=${usuario.getIdUsuario()}">
+													<input class="btn btn-info btn-block" type="submit" value="Editar" />
 												</form>
 											</td>
 											<td>
-												<form method="POST"
-													action="ServletEliminarCategoria.do?idCategoria=${categoria.getIdCategoria()}">
-													<input class="btn btn-danger btn-block" type="submit"
-														value="Eliminar"
-														onclick="return confirm('Esta seguro que desea eliminar esta categoria? \n(Los productos que tengan la categoria eliminada pasaran a tener una categoria indefinida)')" />
-												</form>
+												<c:choose>
+												 	<c:when test="${usuarioActual.getIdUsuario() == usuario.getIdUsuario()}">
+												  		<h4>Usuario Actual</h4>
+												  	</c:when>
+												  	<c:otherwise>
+													    <form method="POST" action="ServletEliminarUsuario.do?token=${token}&idUsuario=${usuario.getIdUsuario()}">
+															<input class="btn btn-danger btn-block" type="submit" value="Eliminar"
+																onclick="return confirm('Esta seguro que desea eliminar este usuario?')" />
+														</form>
+												  	</c:otherwise>
+												</c:choose>
 											</td>
 
 										</tr>
@@ -205,12 +215,12 @@
 	<!-- /#wrapper -->
 
 	<!-- Edit Modal HTML -->
-	<div id="addCategoryModal" class="modal fade">
+	<div id="addUserModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="POST" action="ServletAgregarCategoria.do">
+				<form method="POST" action="ServletAgregarUsuario.do?token=${token }">
 					<div class="modal-header">
-						<h4 class="modal-title">Agregar Categoria</h4>
+						<h4 class="modal-title">Agregar Usuario</h4>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
 					</div>
@@ -220,8 +230,31 @@
 								name="txtNombre" required>
 						</div>
 						<div class="form-group">
-							<label>Descripcion</label>
-							<textarea class="form-control" name="txtDescripcion"></textarea>
+							<label>Correo Electronico</label> <input type="text" class="form-control"
+								name="txtEmail" required>
+						</div>
+						<div class="form-group">
+							<label>Nick (Usuario)</label> <input type="text" class="form-control"
+								name="txtNick" required>
+						</div>
+						<div class="form-group">
+							<label>Password</label> <input type="password" class="form-control"
+								name="txtPassword" required>
+						</div>
+						<div class="form-group">
+							<label>Rol</label> <select class="form-control"
+								name="slcRol">
+								<c:forEach var="rol" items="${listaRoles }">
+									<option>${rol.getNombre() }</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Estado</label> <select class="form-control"
+								name="slcEstado">
+								<option>Activo</option>
+								<option>Inactivo</option>
+							</select>
 						</div>
 					</div>
 					<div class="modal-footer">

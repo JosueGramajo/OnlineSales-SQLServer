@@ -112,7 +112,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Editar Categoria</h1>
+					<h1 class="page-header">Editar Usuario</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -120,25 +120,73 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Datos de la categoria</div>
+						<div class="panel-heading">Datos del usuario</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-8">
 									<form method="POST"
-										action="ServletEditarCategoria.do?idCategoria=${category.getIdCategoria() }">
+										action="ServletEditarUsuario.do?token=${token}&idUsuario=${usuario.getIdUsuario()}">
 										<div class="form-group">
 											<label>Nombre</label> <input name="txtNombre"
-												class="form-control" value="${category.getNombre() }">
+												class="form-control" value="${usuario.getNombre() }">
 										</div>
 										<div class="form-group">
-											<label>Descripcion</label>
-											<textarea name="txtDescripcion" class="form-control" rows="3">${category.getDescripcion() }</textarea>
+											<label>Email</label> 
+											<input name="txtEmail" class="form-control" value="${usuario.getEmail() }">
+										</div>
+										<div class="form-group">
+											<label>Nick</label> 
+											<input name="txtNick" class="form-control" value="${usuario.getNick() }">
+										</div>
+										<div class="form-group">
+											<label>Password (Dejar en blanco para no cambiarla)</label> 
+											<input name="txtPassword" type="password" class="form-control" value="">
+										</div>										
+										<div class="form-group">
+											<label>Rol</label> <select class="form-control"
+												name="slcRol">
+												<option style="display: none"></option>
+												<c:forEach var="rol" items="${listaRoles}">
+													<c:choose>
+														<c:when
+															test="${rol.getIdRol() == usuario.getIdRol()}">
+															<option selected="selected">${rol.getNombre() }</option>
+														</c:when>
+														<c:otherwise>
+															<option>${rol.getNombre() }</option>
+														</c:otherwise>
+													</c:choose>
+
+												</c:forEach>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Estado</label> 
+											<select class="form-control" name="slcEstado">
+												<c:choose>
+													<c:when test="${producto.getEstado() == 'activo'}">
+														<option selected="selected">Activo</option>
+													</c:when>
+													<c:otherwise>
+														<option>Activo</option>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when test="${producto.getEstado() == 'inactivo'}">
+														<option selected="selected">Inactivo</option>
+													</c:when>
+													<c:otherwise>
+														<option>Inactivo</option>
+													</c:otherwise>
+												</c:choose>
+												
+											</select>
 										</div>
 
-
-										<a href="ServletRedireccionar.do?page=categories"
-											class="btn btn-default">Cancelar</a> <input type="submit"
-											class="btn btn-success" value="Guardar Cambios" />
+										
+										<a href="ServletRedireccionar.do?page=users" class="btn btn-default">Cancelar</a> 
+										
+										<input type="submit" class="btn btn-success" value="Guardar Cambios" />
 									</form>
 								</div>
 								<!-- /.col-lg-6 (nested) -->

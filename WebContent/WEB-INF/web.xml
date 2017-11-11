@@ -92,6 +92,30 @@
     <servlet-name>ServletRealizarCompra</servlet-name>
     <url-pattern>/ServletRealizarCompra.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletAgregarUsuario</servlet-name>
+    <servlet-class>org.umg.servlet.usuario.ServletAgregarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAgregarUsuario</servlet-name>
+    <url-pattern>/ServletAgregarUsuario.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletEliminarUsuario</servlet-name>
+    <servlet-class>org.umg.servlet.usuario.ServletEliminarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletEliminarUsuario</servlet-name>
+    <url-pattern>/ServletEliminarUsuario.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ServletEditarUsuario</servlet-name>
+    <servlet-class>org.umg.servlet.usuario.ServletEditarUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletEditarUsuario</servlet-name>
+    <url-pattern>/ServletEditarUsuario.do</url-pattern>
+  </servlet-mapping>
   <jsp-config>
     <taglib>
       <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>

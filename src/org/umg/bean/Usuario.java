@@ -1,5 +1,7 @@
 package org.umg.bean;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+
 public class Usuario {
 	private Integer idUsuario;
 	private String nombre;
@@ -7,12 +9,13 @@ public class Usuario {
 	private String email;
 	private String password;
 	private Integer idRol;
+	private String estado;
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(Integer idUsuario, String nombre, String nick, String email, String password, Integer idRol) {
+	public Usuario(Integer idUsuario, String nombre, String nick, String email, String password, Integer idRol, String estado) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -20,6 +23,7 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 		this.idRol = idRol;
+		this.estado = estado;
 	}
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -56,6 +60,14 @@ public class Usuario {
 	}
 	public void setIdRol(Integer idRol) {
 		this.idRol = idRol;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 

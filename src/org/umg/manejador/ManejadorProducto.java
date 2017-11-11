@@ -8,6 +8,8 @@ import org.umg.bean.Producto;
 import org.umg.bean.Usuario;
 import org.umg.db.Conexion;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import oracle.net.aso.p;
 
 public class ManejadorProducto {
@@ -40,6 +42,35 @@ public class ManejadorProducto {
 
 		return list;
 	}
+	
+	public ArrayList<Producto> getProductsByCategory(String idCategoria){
+		ArrayList<Producto> list = new ArrayList<Producto>();
+		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from producto where estado <> 'inactivo' and idCategoria = "+idCategoria+" order by nombre ASC");
+
+		try {
+			Producto producto;
+			while (rSet.next()) {
+				producto = new Producto();
+				producto.setIdProducto(rSet.getInt("idProducto"));
+				producto.setNombre(rSet.getString("nombre"));
+				producto.setPrecio(rSet.getFloat("precio"));
+				producto.setImagen(rSet.getString("imagen"));
+				producto.setDescripcion(rSet.getString("descripcion"));
+				producto.setEstado(rSet.getString("estado"));
+				producto.setExistencias(rSet.getInt("existencias"));
+				producto.setIdCategoria(rSet.getInt("idCategoria"));
+				producto.setRating(rSet.getInt("rating"));
+
+				list.add(producto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;		
+	}
+	
 	public ArrayList<Producto> getAllProducts() {
 		ArrayList<Producto> list = new ArrayList<Producto>();
 		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("select * from producto order by nombre ASC");

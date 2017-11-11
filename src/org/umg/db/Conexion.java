@@ -11,6 +11,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 public class Conexion {
 	private Connection conexion;
 	private Statement stm;
+	private Statement sstm;
 	public static final Conexion INSTANCIA=new Conexion();
 	
 	public Conexion(){
@@ -18,6 +19,7 @@ public class Conexion {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
 			conexion=DriverManager.getConnection("jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=OnlineSales;integratedSecurity=false","sa","123456");
 			stm=conexion.createStatement();
+			sstm = conexion.createStatement();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -42,6 +44,15 @@ public class Conexion {
 		ResultSet rs=null;
 		try {
 			rs=stm.executeQuery(consulta);
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		return rs;
+	}
+	public ResultSet obtenerConsultaSecundaria(String consulta){
+		ResultSet rs=null;
+		try {
+			rs=sstm.executeQuery(consulta);
 		} catch (SQLException e) {
 			// TODO: handle exception
 		}

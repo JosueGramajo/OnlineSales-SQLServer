@@ -47,13 +47,11 @@
 								class="fa fa-pencil-square-o" style="color: #858a91;"></i>
 								Consola administrativa</a></li>
 					</c:if>
-					<li class="fa nav-item active"><a class="nav-link" href="#"><i
+					<li class="fa nav-item active"><a class="nav-link" href="ServletRedireccionar.do?page=dashboard"><i
 							class="fa fa-home"></i> Pagina Principal <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="fa nav-item"><a class="nav-link" href="#"><i
+					<li class="fa nav-item"><a class="nav-link" href="ServletRedireccionar.do?page=checkout"><i
 							class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito (${cantidadCarrito})</a></li>
-					<li class="fa nav-item"><a class="nav-link" href="#"><i
-							class="fa fa-info-circle"></i> Acerca de</a></li>
 					<li class="fa nav-item"><a class="nav-link"
 						href="ServletRedireccionar.do?page=logout"><i
 							class="fa fa-sign-out fa-fw"></i> Cerrar Sesion</a></li>
@@ -61,6 +59,7 @@
 			</div>
 		</div>
 	</nav>
+	
 
 	<!-- Page Content -->
 	<div class="container">
@@ -83,52 +82,61 @@
 				<h1 class="my-4">${nombreUsuario }</h1>
 				<div class="list-group">
 					<c:forEach var="categoria" items="${listaCategorias}">
-						<a href="#" class="list-group-item">${categoria.getNombre()}</a>
+						<a href="ServletRedireccionar.do?page=filterDashboard&idCategoria=${categoria.getIdCategoria()}" class="list-group-item">${categoria.getNombre()}</a>
 					</c:forEach>
 				</div>
 
 			</div>
 			<!-- /.col-lg-3 -->
-
-			<div class="col-lg-9">
-
-				<div id="carouselExampleIndicators" class="carousel slide my-4"
-					data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-					</ol>
-					<div class="carousel-inner" role="listbox">
-						<div class="carousel-item active">
-							<img class="d-block img-fluid"
-								src="assets/img/banners/banner1.png" alt="First slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block img-fluid"
-								src="assets/img/banners/banner2.png" alt="Second slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block img-fluid"
-								src="assets/img/banners/banner3.png" alt="Third slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block img-fluid"
-								src="assets/img/banners/banner4.png" alt="Third slide">
-						</div>
-					</div>
-					<a class="carousel-control-prev" href="#carouselExampleIndicators"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
+			
+	
+			<c:if test="${listaProductos.size() ==  0}">
+				
+				<div class="col-lg-9">
+					<h1>No se encontraron productos con esta categoria :(</h1>
 				</div>
+			</c:if>
+			<div class="col-lg-9">
+				<c:if test="${hideCarousel != 'true' }">
+					<div id="carouselExampleIndicators" class="carousel slide my-4"
+						data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#carouselExampleIndicators" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+						</ol>
+						<div class="carousel-inner" role="listbox">
+							<div class="carousel-item active">
+								<img class="d-block img-fluid"
+									src="assets/img/banners/banner1.png" alt="First slide">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block img-fluid"
+									src="assets/img/banners/banner2.png" alt="Second slide">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block img-fluid"
+									src="assets/img/banners/banner3.png" alt="Third slide">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block img-fluid"
+									src="assets/img/banners/banner4.png" alt="Third slide">
+							</div>
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators"
+							role="button" data-slide="prev"> <span
+							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+							class="sr-only">Previous</span>
+						</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+							role="button" data-slide="next"> <span
+							class="carousel-control-next-icon" aria-hidden="true"></span> <span
+							class="sr-only">Next</span>
+						</a>
+					</div>	
+				</c:if>
+
 
 				<div class="row">
 					<c:forEach var="producto" items="${listaProductos}">
