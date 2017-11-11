@@ -9,6 +9,7 @@ import org.umg.bean.CartItem;
 import org.umg.bean.Compra;
 import org.umg.bean.Usuario;
 import org.umg.db.Conexion;
+import org.umg.utils.GeneratePDF;
 
 import com.sun.org.apache.bcel.internal.generic.INEG;
 
@@ -30,13 +31,13 @@ public class ManejadorCompra {
 			insertDetail(item.getProducto().getIdProducto(), item.getCantidad());
 		}
 		
+		GeneratePDF.INSTANCIA.setIdFactura(Integer.toString(getLastInvoice()));
+		
 		ManejadorCarrito.listaCarrito.clear();
 	}
 	
 	public void insertDetail(Integer idProducto, int cantidad) {
-		String consulta = "DECLARE @idFactura [int]; \r\n" + 
-				"SELECT @idFactura  = SCOPE_IDENTITY(); \r\n" + 
-				"insert into detalle_factura values (@idFactura,"+idProducto+","+cantidad+");";
+		String consulta = "insert into detalle_factura values ("+getLastInvoice()+","+idProducto+","+cantidad+");";
 		
 		try {
 			System.out.println(consulta);
@@ -52,6 +53,18 @@ public class ManejadorCompra {
 		try {
 			while(rSet.next()) {
 				noFactura = rSet.getInt("noFactura") + 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return noFactura;
+	}
+	public int getLastInvoice() {
+		ResultSet rSet = Conexion.INSTANCIA.obtenerConsulta("SELECT TOP 1 idFactura FROM factura ORDER BY idFactura DESC");
+		int noFactura = 1;
+		try {
+			while(rSet.next()) {
+				noFactura = rSet.getInt("idFactura");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

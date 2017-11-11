@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Admin Console</title>
+<title>OnlineSales - Administrator</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
@@ -59,7 +59,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html" style="color: white;">Bienvenido
+				<a class="navbar-brand" style="color: white;">Bienvenido
 					${usuario.getNombre()}</a>
 			</div>
 			<!-- /.navbar-header -->
@@ -160,8 +160,12 @@
 							</c:forEach>
 							
 							<h4 style="float: right;">Total: Q.${compra.getTotal()}</h4>
-						</div>
+							<br><br>
 
+						</div>
+						<a style="float: right;" href="ReportServlet.do?idFactura=${compra.getIdFactura()}" class="btn btn-info">     Generar Factura     </a>
+						<br><br><br>
+				
 						<!-- /.panel-body -->
 					</div>
 					<!-- /.panel -->

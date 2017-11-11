@@ -28,9 +28,14 @@ public class ServletAutenticar extends HttpServlet {
 		Usuario aUsuario = ManejadorUsuario.INSTANCIA.doLogin(usuario, password);
 		
 		if(aUsuario.getIdUsuario() != -1) {
-			ManejadorUsuario.sessionUser = aUsuario;
-			peticion.setAttribute("usuario", usuario);
-			despachador = peticion.getRequestDispatcher("ServletRedireccionar.do?page=firstDashboard");
+			if(aUsuario.getEstado().equalsIgnoreCase("inactivo")) {
+				peticion.setAttribute("estado", "Este usuario se encuentra inactivo");
+				despachador = peticion.getRequestDispatcher("index.jsp");	
+			}else {
+				ManejadorUsuario.sessionUser = aUsuario;
+				peticion.setAttribute("usuario", usuario);
+				despachador = peticion.getRequestDispatcher("ServletRedireccionar.do?page=firstDashboard");	
+			}
 			
 		}else {
 			peticion.setAttribute("estado", "Usuario o contraseña incorrectos");

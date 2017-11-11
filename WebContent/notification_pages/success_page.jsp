@@ -6,8 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Swim Wear a E-Commerce online Shopping Category Flat
-	Bootstrap Responsive Website Template| Single :: w3layouts</title>
+<title>OnlineSales</title>
 <link href="assets/detail_resources/css/bootstrap.css" rel="stylesheet"
 	type="text/css" media="all" />
 <link href="assets/detail_resources/css/style.css" rel="stylesheet"
@@ -91,7 +90,9 @@
 					<h1>${producto.getNombre() }</h1>
 					<p style="font-size: 20px; color: #5C5C5C;">Gracias por tu preferencia y realizar tu compra con nosotros, esperamos que vuelvas pronto</p><br><br>
 					<a href="ServletRedireccionar.do?page=dashboard"
-						class="btn btn-default">     Continuar Comprando     </a> <br>
+						class="btn btn-default">     Continuar Comprando     </a> <br><br>
+					<a href="ReportServlet.do"
+						class="btn btn-info">     Generar Factura     </a> <br><br><br><br>
 					<br>
 				</div>
 

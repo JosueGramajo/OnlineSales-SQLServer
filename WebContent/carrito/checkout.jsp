@@ -6,8 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Swim Wear a E-Commerce online Shopping Category Flat
-	Bootstrap Responsive Website Template| Single :: w3layouts</title>
+<title>OnlineSales</title>
 <link href="assets/detail_resources/css/bootstrap.css" rel="stylesheet"
 	type="text/css" media="all" />
 <link href="assets/detail_resources/css/style.css" rel="stylesheet"
